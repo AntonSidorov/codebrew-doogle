@@ -31,20 +31,21 @@
     <div class="left map-overlay" [class.open]='true'>
       <div class="map-overlay-content mat-elevation-z5 requests">
         <div *ngFor='let request of requests' class='request' [ngClass]='request.urgency.toLowerCase()' (click)='openIW(request)'>
-          <div class="request-name">
-            {{request.name}}
-          </div>
-          <div class="request-description">
-            {{request.shortDescription}}
-          </div>
-          <div class="request-stats">
-            <div class="request-stat">
-              <mat-icon>person</mat-icon> {{request.peopleAffected}}</div>
-            <div class="request-stat">
-              <mat-icon>work</mat-icon> {{request.workersRequested}}
-            </div>
-          </div>
         </div>
+        <ng-container *ngIf='communities | async as communities'>
+          <mat-accordion>
+            <mat-expansion-panel *ngFor='let community of communities' class='community'>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  {{(community.names || [''])[0]}}
+                </mat-panel-title>
+                <mat-panel-description>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              
+            </mat-expansion-panel>
+          </mat-accordion>
+        </ng-container>
       </div>
       <a mat-icon-button color="primary" class="mat-elevation-z7 map-overlay-button" (click)='toggleOverlay(true)'>
         <mat-icon>{{overlays.left ? 'keyboard_arrow_left' : 'keyboard_arrow_right'}}</mat-icon>
@@ -57,8 +58,8 @@
       <div class="map-overlay-content mat-elevation-z5"></div>
     </div>
   </div>
-  <agm-map #gmap class='map' [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false"
-    (mapClick)='mapClick(gmap)'>
+  <agm-map #gmap class='map' [latitude]="gm.lat" [longitude]="gm.lng" [zoom]="gm.zoom" [disableDefaultUI]="false" [zoomControl]="false"
+    (mapClick)='this.openWindow?.close()'>
     <ng-container *ngFor='let request of requests'>
       <agm-info-window #iw [latitude]='request.geoData.lat' [longitude]='request.geoData.long' [request]='request'>
         {{request.description}}
