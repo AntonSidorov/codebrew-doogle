@@ -86,11 +86,11 @@ app.post("/response", (req, res) => {
       userNeeds.push(userInput[i]);
     }
   }
-  /*if (userNeeds.length === 0){
+  if (userNeeds.length === 0){
     payload.body = "didn't understand your message sorry";
     payload.to = req.body.from;
     apiInstance.sendSMS(payload, callback);
-  }*/
+  }
   console.log(userNeeds);
   res.status(200).send();
 });
