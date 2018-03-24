@@ -1,7 +1,8 @@
+import { DataCommunitiesLoad } from './actions/data.actions';
+import { DbService } from './db.service';
 import { AidRequest } from './classes/index';
 import { Helper } from './classes/helper';
-import { fake } from './classes';
-import { AUTH } from './state/selectors';
+import { AUTH, DATA } from './state/selectors';
 import { Observable } from 'rxjs/Observable';
 import { Component, AfterViewInit, HostListener, HostBinding, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { Store } from '@ngrx/store';
@@ -20,13 +21,15 @@ import { InfoWindow } from '@agm/core/services/google-maps-types';
 
 })
 export class AppComponent implements AfterViewInit, OnInit {
-  lat = 13.253179;
-  lng = 18.123326;
-  zoom = 6;
+  gm = { lat: 13.253179, lng: 18.123326, zoom: 6 };
   login = false;
   upload = false;
   auth = this.store.select(AUTH.state);
   openWindow = undefined;
+
+  communities = this.store.select(DATA.communities);
+
+  query = '';
 
   @ViewChildren('iw')
   infoWindows: QueryList<any>;
@@ -37,8 +40,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
   overlays: { left: boolean, right: boolean } = { left: false, right: false };
 
-  constructor(private store: Store<AppState>, private mapApiWrapper: GoogleMapsAPIWrapper) {
-
+  constructor(private store: Store<AppState>, private mapApiWrapper: GoogleMapsAPIWrapper, public db: DbService) {
   }
 
   log = (e) => console.log(e);
@@ -66,9 +68,6 @@ export class AppComponent implements AfterViewInit, OnInit {
   ngAfterViewInit() {
     this.infoWindows.changes.subscribe(r => this.handleIWs(this.infoWindows.toArray()));
     this.handleIWs(this.infoWindows.toArray());
-    setTimeout(() => {
-      this.requests = [].concat(...fake().communities.map(v => v.requests));
-    }, 2000);
   }
 
   handleIWs(infoWindows: any[]) {
@@ -85,7 +84,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
 
   ngOnInit() {
-    this.requests = [].concat(...fake().communities.map(v => v.requests)).slice(0, 25);
+    this.store.dispatch(new DataCommunitiesLoad());
   }
 
   toggleLogin = () => { this.login = !this.login; this.upload = false; };
@@ -95,8 +94,5 @@ export class AppComponent implements AfterViewInit, OnInit {
       this.overlays.left = !this.overlays.left;
     else
       this.overlays.right = !this.overlays.right;
-    console.log(this.overlays);
   }
-  // @HostListener('window:resize', ['$event'])
-  // onResize = event => this.store.dispatch(new UiWindowResize(event.target.innerWidth, event.target.innerHeight));
 }

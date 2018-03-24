@@ -23,7 +23,8 @@ import {
   MatButtonModule,
   MatIconModule,
   MatSlideToggleModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatExpansionModule,
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -31,6 +32,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
 import { AgmCoreModule } from '@agm/core';
+
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
 // Main - NGRX
 import { initial, AppState } from './state';
@@ -40,6 +45,7 @@ import { SimpleSerializer } from './ngrx';
 import { ListComponent } from './list/list.component';
 import { FiltersComponent } from './filters/filters.component';
 import { UploadComponent } from './upload/upload.component';
+import { DbService } from './db.service';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, ListComponent, FiltersComponent, UploadComponent],
@@ -56,6 +62,10 @@ import { UploadComponent } from './upload/upload.component';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyA_B4fvMgb4mWh_DozXU-jpn84FcrKDh5s'
     }),
+    // Firebase
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFireDatabaseModule,
     // Angular Material
     BrowserAnimationsModule,
     MatInputModule,
@@ -64,6 +74,7 @@ import { UploadComponent } from './upload/upload.component';
     MatIconModule,
     MatSlideToggleModule,
     MatProgressSpinnerModule,
+    MatExpansionModule,
     EffectsModule.forRoot(effects),
     StoreRouterConnectingModule,
     StoreDevtoolsModule.instrument({ maxAge: 50 })
@@ -71,7 +82,8 @@ import { UploadComponent } from './upload/upload.component';
   providers: [
     /* services */
     // { provide: OverlayContainer, useClass: FullscreenOverlayContainer },
-    { provide: RouterStateSerializer, useClass: SimpleSerializer },
+    DbService,
+    { provide: RouterStateSerializer, useClass: SimpleSerializer, },
   ],
   bootstrap: [AppComponent],
   schemas:
