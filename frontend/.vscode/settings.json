@@ -12,5 +12,6 @@
     // "src/tsconfig.spec.json": true,
     // "src/typings.d.ts": true,
     // "src/test.ts": true
+    "**/*.spec.ts": true
   }
 }

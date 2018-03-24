@@ -1,2 +1,5 @@
 // This makes importing things much easier with autocomplete
-export { /*actions*/ };
+
+import * as MapActions from './map.actions';
+export { MapActions };
+
