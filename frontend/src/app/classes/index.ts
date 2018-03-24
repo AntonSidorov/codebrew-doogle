@@ -21,7 +21,7 @@ export class AidRequest {
   type: string;
   workers: string[] = [];
   peopleAffected?: number;
-  date?: Date;
+  date?: number;
   urgency: 'LOW' | 'MEDIUM' | 'HIGH' = 'LOW';
 }
 
@@ -40,51 +40,56 @@ export let fake: FakeData = {
   communities: [
     // Define fakes here
     {
-    name: ["George"],
-    requests: [ {
-      lat: 11.5088255,
-      long: 42.1016962,
-      radius: 10
-    },
-    "Vitamin A Shortage",
-    "There's a shortage of Vitamin A in The George Community. Assistance needed.",
-    3,
-    "Medical",
-    [],
-    23,
-    1521880873,
-    'MEDIUM'
-    ],
-    location: {
-      lat: 11.5088255,
-      long: 42.1016962,
-      radius: 10
+      names: ['George'],
+      requests: [
+        {
+          geoData: {
+            lat: 11.5088255,
+            long: 42.1016962,
+            radius: 10
+          },
+          name: 'Vitamin A Shortage',
+          shortDescription: 'There\'s a shortage of Vitamin A in The George Community. Assistance needed.',
+          description: "LONG DESCRIPTION PLSO",
+          workersRequested: 3,
+          type: 'Medical',
+          workers: [],
+          peopleAffected: 23,
+          date: 1521880873,
+          urgency: 'MEDIUM'
+        },
+
+      ],
+      location: {
+        lat: 11.5088255,
+        long: 42.1016962,
+        radius: 10
+      }
     }
-  }
   ],
   users: [
 
     {
-      id: "1",
-      email: "lyndacoates121@gmail.com",
-      name: "Lynda Coates",
-      password: "bigboi91",
+      id: '1',
+      email: 'lyndacoates121@gmail.com',
+      name: 'Lynda Coates',
+      password: 'bigboi91',
       onField: true
     }
     ,
     {
-      id: "2",
-      email: "felixclayton121@gmail.com",
-      name: "Felix Clayton",
-      password: "smallboy99",
+      id: '2',
+      email: 'felixclayton121@gmail.com',
+      name: 'Felix Clayton',
+      password: 'smallboy99',
       onField: true
     }
     ,
     {
-      id: "3",
-      email: "LexKimster@hotmail.com",
-      name: "Lex Kim",
-      password: "mediumman356",
+      id: '3',
+      email: 'LexKimster@hotmail.com',
+      name: 'Lex Kim',
+      password: 'mediumman356',
       onField: true
     }
     ,
