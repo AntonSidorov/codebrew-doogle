@@ -81,14 +81,14 @@ app.post("/response", (req, res) => {
   console.log('Got a message:' + JSON.stringify(userInput));
   let userNeeds = [];
   for (let i = 0; i < userInput.length; i++){
-    if (userInput[i].match(/(medical|sanitation|water|education|agriculture)/gi)
+    if (userInput[i].match(/(medical|sanitation|water|education|agriculture|material|emergency)/gi)
       && (userNeeds.indexOf(userInput[i].toUpperCase()) === -1)){
       userNeeds.push({
         neededAidType: userInput[i].toUpperCase(),
         specifications: ""
       });
       while (i + 1 < userInput.length &&
-        userInput[i + 1].match(/(medical|sanitation|water|education|agriculture|material)/gi) === null
+        userInput[i + 1].match(/(medical|sanitation|water|education|agriculture|material|emergency)/gi) === null
               && i < userInput.length){
         userNeeds[userNeeds.length - 1].specifications += userInput[i + 1] + " ";
         i++;
@@ -107,9 +107,6 @@ app.post("/response", (req, res) => {
   console.log(userNeeds);
   res.status(200).send();
 });
-
-
-// ‘Medical’, ‘Sanitation’, ‘Water’, ‘Education’, ‘Agriculture’
 
 // https://www.npmjs.com/package/telstra-messaging
 
