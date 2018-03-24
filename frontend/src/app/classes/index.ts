@@ -39,6 +39,28 @@ export class FakeData {
 export let fake: FakeData = {
   communities: [
     // Define fakes here
+    {
+    name: ["George"],
+    requests: [ {
+      lat: 11.5088255,
+      long: 42.1016962,
+      radius: 10
+    },
+    "Vitamin A Shortage",
+    "There's a shortage of Vitamin A in The George Community. Assistance needed.",
+    3,
+    "Medical",
+    [],
+    23,
+    1521880873,
+    'MEDIUM'
+    ],
+    location: {
+      lat: 11.5088255,
+      long: 42.1016962,
+      radius: 10
+    }
+  }
   ],
   users: [
     // Define more fakes here
