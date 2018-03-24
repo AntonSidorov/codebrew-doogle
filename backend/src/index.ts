@@ -87,14 +87,9 @@ app.post("/response", (req, res) => {
         neededAidType: userInput[i].toUpperCase(),
         specifications: ""
       });
-      if (i < userInput.length - 2 && !userInput[i + 1].match(/(medical|sanitation|water|education|agriculture)/gi)){
-        if (userInput[i + 1].match(/[-:;|.\n_=]/gi)){
-          i += 1;
-          while (!userInput[i++].match(/(medical|sanitation|water|education|agriculture)/gi)
+      while (!userInput[i++].match(/(medical|sanitation|water|education|agriculture)/gi)
             && i < userInput.length){
-              userNeeds[userNeeds.length - 1].specifications += userInput;
-          }
-        }
+        userNeeds[userNeeds.length - 1].specifications += userInput;
       }
     }
   }
