@@ -77,6 +77,7 @@ let genHeaders = (req, res) => {
 app.get("/search", (req, res) => {});
 
 app.post("/response", (req, res) => {
+  console.log(req.body);
   let userInput = req.body.body.split(' ');
   console.log('Got a message:' + JSON.stringify(userInput));
   let userNeeds = [];
@@ -85,6 +86,11 @@ app.post("/response", (req, res) => {
       userNeeds.push(userInput[i]);
     }
   }
+  /*if (userNeeds.length === 0){
+    payload.body = "didn't understand your message sorry";
+    payload.to = req.body.from;
+    apiInstance.sendSMS(payload, callback);
+  }*/
   console.log(userNeeds);
   res.status(200).send();
 });
