@@ -28,10 +28,8 @@
 
 <div class="map-container">
   <div class="anchor">
-    <div class="left map-overlay" [class.open]='true'>
+    <div class="left map-overlay" [class.open]='overlays.left'>
       <div class="map-overlay-content mat-elevation-z5 requests">
-        <div *ngFor='let request of requests' class='request' [ngClass]='request.urgency.toLowerCase()' (click)='openIW(request)'>
-        </div>
         <ng-container *ngIf='communities | async as communities'>
           <mat-accordion>
             <mat-expansion-panel *ngFor='let community of communities' class='community'>
@@ -42,17 +40,30 @@
                 <mat-panel-description>
                 </mat-panel-description>
               </mat-expansion-panel-header>
-              
+              <ng-container *ngIf='objToArr(community.requests) as requests'>
+                <div *ngFor='let request of requests' class='request' (click)='openIW(request)'>
+                  <div class="request-name">
+                    {{request.name}}
+                  </div>
+                  <div class="request-stats">
+                    <div class="request-stat">
+                      <mat-icon>person</mat-icon> {{request.peopleAffected}}</div>
+                    <div class="request-stat">
+                      <mat-icon>work</mat-icon> {{request.workersRequested}}
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
             </mat-expansion-panel>
           </mat-accordion>
         </ng-container>
       </div>
-      <a mat-icon-button color="primary" class="mat-elevation-z7 map-overlay-button" (click)='toggleOverlay(true)'>
+      <a mat-mini-fab color="primary" class="mat-elevation-z7 map-overlay-button" (click)='toggleOverlay(true)'>
         <mat-icon>{{overlays.left ? 'keyboard_arrow_left' : 'keyboard_arrow_right'}}</mat-icon>
       </a>
     </div>
     <div class="right map-overlay" [class.open]='overlays.right'>
-      <a mat-icon-button color="primary" class="mat-elevation-z7 map-overlay-button" (click)='toggleOverlay(false)'>
+      <a mat-mini-fab color="primary" class="mat-elevation-z7 map-overlay-button" (click)='toggleOverlay(false)'>
         <mat-icon>{{overlays.right ? 'keyboard_arrow_right' : 'keyboard_arrow_left'}}</mat-icon>
       </a>
       <div class="map-overlay-content mat-elevation-z5"></div>
@@ -60,13 +71,12 @@
   </div>
   <agm-map #gmap class='map' [latitude]="gm.lat" [longitude]="gm.lng" [zoom]="gm.zoom" [disableDefaultUI]="false" [zoomControl]="false"
     (mapClick)='this.openWindow?.close()'>
-    <ng-container *ngFor='let request of requests'>
+    <ng-container *ngFor='let request of requests | async'>
       <agm-info-window #iw [latitude]='request.geoData.lat' [longitude]='request.geoData.long' [request]='request'>
         {{request.description}}
       </agm-info-window>
       <agm-circle *ngIf='request' [latitude]='request.geoData.lat' (circleClick)="toggleInfo(iw, gmap)" [longitude]='request.geoData.long'
-        [radius]='request.geoData.radius' [fillColor]='"red"'></agm-circle>
+        [radius]='request.geoData.radius' [fillColor]='request.urgency == "HIGH" ? "red": request.urgency == "MEDIUM" ? "#c39c00": "#2fff2f"'></agm-circle>
     </ng-container>
   </agm-map>
-
 </div>

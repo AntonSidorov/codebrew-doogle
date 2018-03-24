@@ -28,13 +28,12 @@ export class AppComponent implements AfterViewInit, OnInit {
   openWindow = undefined;
 
   communities = this.store.select(DATA.communities);
+  requests = this.communities.map(cs => cs.map(c => Object.values(c.requests))).map(r => [].concat(...r));
 
   query = '';
 
   @ViewChildren('iw')
   infoWindows: QueryList<any>;
-
-  requests: AidRequest[] = [];
 
   requestInfoWindowMap: any[];
 
@@ -42,6 +41,8 @@ export class AppComponent implements AfterViewInit, OnInit {
 
   constructor(private store: Store<AppState>, private mapApiWrapper: GoogleMapsAPIWrapper, public db: DbService) {
   }
+
+  objToArr = (obj) => Object.values(obj);
 
   log = (e) => console.log(e);
   mapClick = (gmap) => {
@@ -65,15 +66,16 @@ export class AppComponent implements AfterViewInit, OnInit {
     this.openWindow = iw;
   }
 
-  ngAfterViewInit() {
+  async ngAfterViewInit() {
     this.infoWindows.changes.subscribe(r => this.handleIWs(this.infoWindows.toArray()));
-    this.handleIWs(this.infoWindows.toArray());
+    await this.handleIWs(this.infoWindows.toArray());
   }
 
-  handleIWs(infoWindows: any[]) {
+  async handleIWs(infoWindows: any[]) {
     let arr = {};
     infoWindows.map(v => arr[`${v.latitude}${v.longitude}`] = { iw: v });
-    this.requests.map(v => arr[`${v.geoData.lat}${v.geoData.long}`] = { ...arr[`${v.geoData.lat}${v.geoData.long}`], req: v });
+    let reqs = await this.requests.take(1).toPromise();
+    reqs.map(v => arr[`${v.geoData.lat}${v.geoData.long}`] = { ...arr[`${v.geoData.lat}${v.geoData.long}`], req: v });
     console.log(Object.values(arr));
     this.requestInfoWindowMap = Object.values(arr);
   }
