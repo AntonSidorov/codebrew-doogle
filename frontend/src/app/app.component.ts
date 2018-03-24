@@ -13,6 +13,8 @@ import { AppState } from './state';
 })
 export class AppComponent implements AfterViewInit, OnInit {
 
+  login = false;
+
   constructor(private store: Store<AppState>) {
 
   }
@@ -21,6 +23,8 @@ export class AppComponent implements AfterViewInit, OnInit {
   }
   ngOnInit() {
   }
+
+  toggleLogin = () => this.login = !this.login;
 
   // @HostListener('window:resize', ['$event'])
   // onResize = event => this.store.dispatch(new UiWindowResize(event.target.innerWidth, event.target.innerHeight));

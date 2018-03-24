@@ -1,3 +1,4 @@
+import { LoginComponent } from './login/login.component';
 import { environment } from '../environments/environment';
 
 import { BrowserModule } from '@angular/platform-browser';
@@ -16,16 +17,14 @@ import { stateReducer, SETROOT } from './reducers/root.reducer';
 import { createNewHosts, removeNgStyles, createInputTransfer } from '@angularclass/hmr';
 
 // // Material
-// import {
-//   MatSnackBarModule,
-//   MatInputModule,
-//   MatFormFieldModule,
-//   MatButtonModule,
-//   MatIconModule,
-//   MatSlideToggleModule,
-//   MatDialogModule,
-//   MatProgressSpinnerModule
-// } from '@angular/material';
+import {
+  MatInputModule,
+  MatFormFieldModule,
+  MatButtonModule,
+  MatIconModule,
+  MatSlideToggleModule,
+  MatProgressSpinnerModule
+} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Main - Angular
@@ -39,7 +38,7 @@ import { reducers } from './reducers';
 import { SimpleSerializer } from './ngrx';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, LoginComponent],
   imports: [
     BrowserModule,
     FormsModule,
@@ -50,6 +49,14 @@ import { SimpleSerializer } from './ngrx';
       initialState: initial,
       metaReducers: [stateReducer]
     }),
+    // Angular Material
+    BrowserAnimationsModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatIconModule,
+    MatSlideToggleModule,
+    MatProgressSpinnerModule,
     EffectsModule.forRoot(effects),
     StoreRouterConnectingModule,
     StoreDevtoolsModule.instrument({ maxAge: 50 })
@@ -57,12 +64,12 @@ import { SimpleSerializer } from './ngrx';
   providers: [
     /* services */
     // { provide: OverlayContainer, useClass: FullscreenOverlayContainer },
-    { provide: RouterStateSerializer, useClass: SimpleSerializer }
+    { provide: RouterStateSerializer, useClass: SimpleSerializer },
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(public appRef: ApplicationRef, private _store: Store<AppState>) {}
+  constructor(public appRef: ApplicationRef, private _store: Store<AppState>) { }
 
   hmrOnInit(store) {
     if (!store || !store.rootState) return;

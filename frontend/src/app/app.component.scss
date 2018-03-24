@@ -1,1 +1,22 @@
 @import '../css/_settings.scss';
+:host {
+    display: flex;
+    flex-direction: column; // background-image: url("/assets/img/background.jpg");
+    // background-size: cover;
+    // background-position: center;
+}
+
+.navbar .logo {
+    height: 2rem;
+}
+
+.navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: .5rem 2rem;
+}
+
+.homepage {
+    padding: 0;
+}

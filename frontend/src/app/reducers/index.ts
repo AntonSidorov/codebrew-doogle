@@ -4,5 +4,6 @@ import { emptyReducer } from './empty.reducer';
 
 export const reducers = {
   routerReducer: routerReducer,
+  auth: emptyReducer
   // reducers
 };
