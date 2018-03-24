@@ -18,7 +18,7 @@ let serv: admin.ServiceAccount = {
   clientEmail: "firebase-adminsdk-pd8q5@open-aid-2.iam.gserviceaccount.com"
 };
 
-const defaultApp = admin.initializeApp({credential: admin.credential.cert(serv), databaseURL: 'https://open-aid-2.firebaseio.com/'});
+const defaultApp = admin.initializeApp({ credential: admin.credential.cert(serv), databaseURL: 'https://open-aid-2.firebaseio.com/' });
 
 let defaultAuth = defaultApp.auth();
 let defaultDatabase = defaultApp.database();
