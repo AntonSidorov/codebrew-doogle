@@ -39,7 +39,7 @@ var defaultClient = TelstraMessaging.ApiClient.instance;
 
 // Configure OAuth2 access token for authorization: auth
 var auth = defaultClient.authentications["auth"];
-auth.accessToken = "6L6XNzEwaxosGHlDLdjFSJxfPNOc";
+auth.accessToken = "L789OUnebzRcIlYo7K94EJGnBxAO";
 
 var apiInstance = new TelstraMessaging.MessagingApi();
 
@@ -122,18 +122,16 @@ app.post("/response", (req, res) => {
   }
   console.log(userNeeds);
   defaultDatabase.ref('communities/0/requests').push().set({
-    fromNumber: {
-      description: userNeeds,
-      peopleAffected: 100 + Math.floor(Helper.randomNumber(0, 13)),
-      geoData: {
-        lat: -37.797705 + Helper.randomNumber(-0.0005, 0.0005),
-        long: 144.958773 + Helper.randomNumber(-0.0005, 0.0005),
-        radius: 33
-      },
-      name: "User Request",
-      urgency: getUrgency(),
-      workersRequested: Math.floor(Helper.randomNumber(5, 10))
-    }
+    description: userNeeds,
+    peopleAffected: 100 + Math.floor(Helper.randomNumber(0, 13)),
+    geoData: {
+      lat: -37.797705 + Helper.randomNumber(-0.0005, 0.0005),
+      long: 144.958773 + Helper.randomNumber(-0.0005, 0.0005),
+      radius: 33
+    },
+    name: "User Request",
+    urgency: getUrgency(),
+    workersRequested: Math.floor(Helper.randomNumber(5, 10))
   });
   res.status(200).send();
 });
