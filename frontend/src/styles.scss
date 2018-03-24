@@ -1,6 +1,5 @@
 @import './css/_global.scss';
 @import './css/_elements.scss';
-
 body,
 html {
     height: 100vh;
@@ -9,6 +8,7 @@ html {
     & {
         margin: 0;
         padding: 0;
+        transition: none;
     }
+    transition: none;
 }
-
