@@ -30,6 +30,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // Main - Angular
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
+import { AgmCoreModule } from '@agm/core';
 
 // Main - NGRX
 import { initial, AppState } from './state';
@@ -51,6 +52,9 @@ import { UploadComponent } from './upload/upload.component';
     StoreModule.forRoot(reducers, {
       initialState: initial,
       metaReducers: [stateReducer]
+    }),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyA_B4fvMgb4mWh_DozXU-jpn84FcrKDh5s'
     }),
     // Angular Material
     BrowserAnimationsModule,
