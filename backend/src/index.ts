@@ -3,23 +3,22 @@
 import * as express from "express";
 import * as http from "http";
 import * as fs from "fs";
-const admin = require('firebase-admin');
-const functions = require('firebase-functions');
+import * as admin from 'firebase-admin';
 const TelstraMessaging = require("Telstra_Messaging");
 import { Helper } from './classes/helper';
+var serviceAccount = require('../service-account.json');
 
-let app = express(),
-  port = 5001,
-  url = "";
-
-var serviceAccount = require('./service.json');
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: 'https://open-aid-2.firebaseio.com/'
 });
 
-const defaultApp = admin.initializeApp(functions.config().firebase);
+let app = express(),
+  port = 5001,
+  url = "";
+
+const defaultApp = admin.initializeApp();
 
 let defaultAuth = defaultApp.auth();
 let defaultDatabase = defaultApp.database();
