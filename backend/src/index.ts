@@ -24,7 +24,7 @@ var defaultClient = TelstraMessaging.ApiClient.instance;
 
 // Configure OAuth2 access token for authorization: auth
 var auth = defaultClient.authentications["auth"];
-auth.accessToken = "3TkmjLNMowpar5UMPklalLL1NYPA";
+auth.accessToken = "NIjjYnnf6rXdrZhdnGXTollpjOmQ";
 
 var apiInstance = new TelstraMessaging.MessagingApi();
 
@@ -76,9 +76,26 @@ let genHeaders = (req, res) => {
 app.get("/search", (req, res) => {});
 
 app.post("/response", (req, res) => {
-  console.log('Got a message:' + JSON.stringify(req.body.body));
+  console.log(req.body);
+  let userInput = req.body.body.split(' ');
+  console.log('Got a message:' + JSON.stringify(userInput));
+  let userNeeds = [];
+  for (let i = 0; i < userInput.length; i++){
+    if (userInput[i].match(/(medical|sanitation|water|education|agriculture)/gi)){
+      userNeeds.push(userInput[i]);
+    }
+  }
+  if (userNeeds.length === 0){
+    payload.body = "didn't understand your message sorry";
+    payload.to = req.body.from;
+    apiInstance.sendSMS(payload, callback);
+  }
+  console.log(userNeeds);
   res.status(200).send();
 });
+
+
+// ‘Medical’, ‘Sanitation’, ‘Water’, ‘Education’, ‘Agriculture’
 
 // https://www.npmjs.com/package/telstra-messaging
 
