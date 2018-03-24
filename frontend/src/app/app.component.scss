@@ -34,11 +34,43 @@
 }
 
 .map {
-    height: calc(100vh - 8rem);
-    margin: 0 2rem;
-    margin-top: 2rem;
+    height: 100%;
+    width: 100%;
     transition: none;
     /deep/ * {
         transition: none;
     }
+}
+
+.map-container { 
+    height: calc(100vh - 8rem);
+    margin: 0 2rem;
+    margin-top: 2rem;
+    position: relative;
+}
+
+.left-box { 
+    display: -ms-flexbox;
+    display: flex;
+    height: 100%;
+    width: 15%;
+    background-color: black;
+}
+
+.right-box { 
+    display: -ms-flexbox;
+    display: flex;
+    height: 100%;
+    width: 15%;
+    background-color: #f72525;
+}
+
+.anchor { 
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
 }
