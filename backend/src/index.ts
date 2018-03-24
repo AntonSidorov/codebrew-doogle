@@ -24,7 +24,7 @@ var defaultClient = TelstraMessaging.ApiClient.instance;
 
 // Configure OAuth2 access token for authorization: auth
 var auth = defaultClient.authentications["auth"];
-auth.accessToken = "GV8fDTOJyg6wlnj9Ta3jSB0rnkt";
+auth.accessToken = "3TkmjLNMowpar5UMPklalLL1NYPA";
 
 var apiInstance = new TelstraMessaging.MessagingApi();
 
@@ -36,7 +36,6 @@ payload.notifyURL = sendingInfo.notifyURL;
 
 var callback = function(error, data, response) {
   if (error) {
-    console.log("---------------------------------------------------");
     console.error(error);
   } else {
     console.log(
