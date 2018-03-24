@@ -3,3 +3,25 @@ app-root {
     display: flex;
     flex-direction: row;
 }
+
+app-upload,
+app-login {
+    display: flex;
+    text-align: left;
+    flex-direction: row;
+    position: absolute;
+    display: block;
+    right: -1rem;
+    width: 20rem;
+    padding: 1rem;
+    border-radius: .25rem;
+    margin-top: .5rem;
+    .login {
+        display: flex;
+        flex-direction: column;
+    }
+    h3 {
+        margin: 0;
+        text-align: center;
+    }
+}

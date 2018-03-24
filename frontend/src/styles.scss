@@ -1,3 +1,6 @@
+@import './css/_global.scss';
+@import './css/_elements.scss';
+
 body,
 html {
     height: 100vh;
@@ -8,3 +11,4 @@ html {
         padding: 0;
     }
 }
+

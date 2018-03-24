@@ -5,5 +5,6 @@ import { AppState } from './index';
 
 
 export let AUTH = {
-  authenticated: (state: AppState) => state.auth.authenticated
+  authenticated: (state: AppState) => state.auth.authenticated,
+  state: (state: AppState) => state.auth
 };

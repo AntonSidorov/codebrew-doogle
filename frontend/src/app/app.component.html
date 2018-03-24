@@ -1,14 +1,24 @@
-<nav class="navbar">
-
+<nav class="navbar mat-elevation-z5">
   <div class="left">
     <a href="/" mat-button routerLink="/" class="homepage">
       <img class='logo' src="assets/img/logo.png" alt="Open_Aid+">
     </a>
   </div>
   <div class="right">
-    <a class="login" (onclick)='toggleLogin()' mat-raised-button color="primary">Log in</a>
-
-    <app-login *ngIf='login'></app-login>
+    <ng-container *ngIf='auth | async as auth'>
+      <div class="upload">
+        <a class="upload-toggle" (click)='toggleUpload()' mat-icon-button color="primary">
+          <mat-icon>cloud_upload</mat-icon>
+        </a>
+        <app-upload *ngIf='upload' class='mat-elevation-z3'></app-upload>
+      </div>
+      <div class="login" *ngIf='!auth.authenticated'>
+        <a class="login-toggle" (click)='toggleLogin()' mat-icon-button color="primary">
+          <mat-icon>person</mat-icon>
+        </a>
+        <app-login *ngIf='login' class='mat-elevation-z3'></app-login>
+      </div>
+    </ng-container>
   </div>
 </nav>
 

@@ -1,3 +1,4 @@
+import { AUTH } from './state/selectors';
 import { Observable } from 'rxjs/Observable';
 import { Component, AfterViewInit, HostListener, HostBinding, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
@@ -14,6 +15,8 @@ import { AppState } from './state';
 export class AppComponent implements AfterViewInit, OnInit {
 
   login = false;
+  upload = false;
+  auth = this.store.select(AUTH.state);
 
   constructor(private store: Store<AppState>) {
 
@@ -24,7 +27,8 @@ export class AppComponent implements AfterViewInit, OnInit {
   ngOnInit() {
   }
 
-  toggleLogin = () => this.login = !this.login;
+  toggleLogin = () => { this.login = !this.login; this.upload = false; };
+  toggleUpload = () => { this.upload = !this.upload; this.login = false; };
 
   // @HostListener('window:resize', ['$event'])
   // onResize = event => this.store.dispatch(new UiWindowResize(event.target.innerWidth, event.target.innerHeight));

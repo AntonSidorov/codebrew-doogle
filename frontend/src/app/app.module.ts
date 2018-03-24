@@ -36,9 +36,12 @@ import { initial, AppState } from './state';
 import { effects } from './effects';
 import { reducers } from './reducers';
 import { SimpleSerializer } from './ngrx';
+import { ListComponent } from './list/list.component';
+import { FiltersComponent } from './filters/filters.component';
+import { UploadComponent } from './upload/upload.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent],
+  declarations: [AppComponent, LoginComponent, ListComponent, FiltersComponent, UploadComponent],
   imports: [
     BrowserModule,
     FormsModule,

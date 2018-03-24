@@ -1,7 +1,10 @@
 @import '../css/_settings.scss';
 :host {
     display: flex;
-    flex-direction: column; // background-image: url("/assets/img/background.jpg");
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    overflow: hidden; // background-image: url("/assets/img/background.jpg");
     // background-size: cover;
     // background-position: center;
 }
@@ -15,8 +18,16 @@
     flex-direction: row;
     justify-content: space-between;
     padding: .5rem 2rem;
+    .left,
+    .right {
+        display: inline-flex;
+    }
 }
 
 .homepage {
     padding: 0;
+}
+
+.login,.upload {
+    position: relative;
 }
