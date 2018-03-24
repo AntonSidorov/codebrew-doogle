@@ -2,10 +2,11 @@ import { Helper } from './classes/helper';
 import { fake } from './classes';
 import { AUTH } from './state/selectors';
 import { Observable } from 'rxjs/Observable';
-import { Component, AfterViewInit, HostListener, HostBinding, OnInit } from '@angular/core';
+import { Component, AfterViewInit, HostListener, HostBinding, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from './state';
 import { GoogleMapsAPIWrapper } from '@agm/core';
+import { InfoWindow } from '@agm/core/services/google-maps-types';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,8 @@ import { GoogleMapsAPIWrapper } from '@agm/core';
   animations: [
 
   ],
-  providers: [GoogleMapsAPIWrapper]
+  providers: [GoogleMapsAPIWrapper],
+
 })
 export class AppComponent implements AfterViewInit, OnInit {
   lat = 13.253179;
@@ -23,20 +25,48 @@ export class AppComponent implements AfterViewInit, OnInit {
   login = false;
   upload = false;
   auth = this.store.select(AUTH.state);
+  openWindow = undefined;
+
+  @ViewChildren('iw')
+  infoWindows: QueryList<any>;
 
   requests = [];
 
   overlays: { left: boolean, right: boolean } = { left: false, right: false };
 
-  constructor(private store: Store<AppState>, private _mapsWrapper: GoogleMapsAPIWrapper) {
+  constructor(private store: Store<AppState>, private mapApiWrapper: GoogleMapsAPIWrapper) {
 
   }
 
-  async ngAfterViewInit() {
-    console.log('t');
-    let a = await this._mapsWrapper.getNativeMap();
-    console.log(a);
-    console.log('t')
+  test(ev) {
+    console.log(ev);
+  }
+  log = (e) => console.log(e);
+  mapClick = (gmap) => {
+    console.log('toggleInfo')
+    if (!this.openWindow) return;
+    this.openWindow.close();
+  }
+  toggleInfo(iw, gmap) {
+    console.log('toggleInfo');
+    if (!this.openWindow) {
+      iw.open();
+      this.openWindow = iw;
+      return;
+    }
+    this.openWindow.close();
+    if (this.openWindow == iw) {
+      this.openWindow = undefined; return;
+    }
+
+    iw.open();
+    this.openWindow = iw;
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      console.log(this.requests);
+    }, 2000);
   }
   ngOnInit() {
     this.requests = [].concat(...fake().communities.map(v => v.requests)).slice(0, 10);
