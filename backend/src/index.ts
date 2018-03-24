@@ -38,10 +38,10 @@ let sendingInfo = {
 var defaultClient = TelstraMessaging.ApiClient.instance;
 
 // Configure OAuth2 access token for authorization: auth
-//var auth = defaultClient.authentications["auth"];
+var auth = defaultClient.authentications["auth"];
 //auth.accessToken = "AAV7XCRH76TEL0HTPdtkgQxUQkX4";
 
-var apiInstance = new TelstraMessaging.MessagingApi();
+var api = new TelstraMessaging.AuthenticationApi()
 
 var clientId = "DiL8SNygmWKsqGPNAPhG3POhXJGhG1GG"; // String | 
 
@@ -49,7 +49,7 @@ var clientSecret = "0NGsHcHScxgwAGOa"; // String |
 
 var grantType = "client_credentials"; // String | 
 
-apiInstance.authToken(clientId, clientSecret, grantType, callback);
+var authToken = api.authToken(clientId, clientSecret, grantType, callback);
 
 var payload = new TelstraMessaging.SendSMSRequest(); // SendSMSRequest | A JSON or XML payload containing the recipient's phone number and text message. The recipient number should be in the format '04xxxxxxxx' where x is a digit
 payload.body = sendingInfo.body;
