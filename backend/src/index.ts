@@ -77,7 +77,7 @@ app.get("/search", (req, res) => {});
 
 app.post("/response", (req, res) => {
   console.log(req.body);
-  let userInput = req.body.body.split(' ');
+  let userInput = req.body.body.split(/[ \n\t\\\r\./,-]/gi);
   console.log('Got a message:' + JSON.stringify(userInput));
   let userNeeds = [];
   for (let i = 0; i < userInput.length; i++){
