@@ -77,7 +77,7 @@ let genHeaders = (req, res) => {
 app.get("/search", (req, res) => {});
 
 app.post("/response", (req, res) => {
-  let userInput = req.body.body.split('');
+  let userInput = req.body.body.split(' ');
   console.log('Got a message:' + JSON.stringify(userInput));
   let userNeeds = [];
   for (let i = 0; i < userInput.length; i++){
