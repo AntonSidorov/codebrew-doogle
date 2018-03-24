@@ -82,8 +82,21 @@ app.post("/response", (req, res) => {
   console.log('Got a message:' + JSON.stringify(userInput));
   let userNeeds = [];
   for (let i = 0; i < userInput.length; i++){
-    if (userInput[i].match(/(medical|sanitation|water|education|agriculture)/gi)){
-      userNeeds.push(userInput[i]);
+    if (userInput[i].match(/(medical|sanitation|water|education|agriculture)/gi)
+      && (userNeeds.indexOf(userInput[i].toUpperCase()) === -1)){
+      userNeeds.push({
+        neededAidType: userInput[i].toUpperCase(),
+        specifications: ""
+      });
+      if (!userInput[i + 1].match(/(medical|sanitation|water|education|agriculture)/gi)){
+        if (userInput[i + 1].match(/[-:;|.\n_=]/gi)){
+          i += 1;
+          while (!userInput[i++].match(/(medical|sanitation|water|education|agriculture)/gi)
+            && i < userInput.length){
+              userNeeds[userNeeds.length - 1].specifications += userInput;
+          }
+        }
+      }
     }
   }
   if (userNeeds.length === 0){
