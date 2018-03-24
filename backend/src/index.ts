@@ -43,7 +43,6 @@ var callback = function(error, data, response) {
     );
   }
 };
-
 //end telstra code
 
 app.set("port", port);
