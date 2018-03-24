@@ -101,6 +101,7 @@ app.get("/call", (req, res) => {
     res.send("Can't send an SMS, invalid token");
     return;
   }
+  console.log(token);
   apiInstance.sendSMS(payload, callback);
   res.send("Sent SMS");
 });
