@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "outDir": "dist",
+    "sourceMap": true,
+    "watch": true
+  },
+  "include": ["src/**/*.ts", "service-account.json"],
+  "exclude": ["node_modules"]
+}
