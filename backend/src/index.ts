@@ -130,22 +130,12 @@ app.post("/response", (req, res) => {
       radius: 33
     },
     name: "SMS Request",
-    urgency: getUrgency(),
+    urgency: Helper.randomItem(['LOW', 'MEDIUM', 'HIGH']),
     workersRequested: Math.floor(Helper.randomNumber(5, 10))
   });
   res.status(200).send();
 });
 
-const getUrgency = () => {
-  const num = Helper.randomNumber(0, 1);
-  if (num < 0.3) {
-    return "LOW";
-  } else if (num < 0.6) {
-    return "MEDIUM";
-  } else {
-    return "HIGH";
-  }
-}
 // https://www.npmjs.com/package/telstra-messaging
 
 // app.get("/phoneactivate", function(req, res) {
