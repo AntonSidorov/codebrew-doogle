@@ -129,7 +129,7 @@ app.post("/response", (req, res) => {
       long: 144.958773 + Helper.randomNumber(-0.0005, 0.0005),
       radius: 33
     },
-    name: "User Request",
+    name: "SMS Request",
     urgency: getUrgency(),
     workersRequested: Math.floor(Helper.randomNumber(5, 10))
   });
