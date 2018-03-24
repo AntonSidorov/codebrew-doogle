@@ -87,9 +87,11 @@ app.post("/response", (req, res) => {
         neededAidType: userInput[i].toUpperCase(),
         specifications: ""
       });
-      while (!userInput[i++].match(/(medical|sanitation|water|education|agriculture)/gi)
-            && i < userInput.length){
-        userNeeds[userNeeds.length - 1].specifications += userInput[i];
+      while (i + 1 < userInput.length &&
+        userInput[i + 1].match(/(medical|sanitation|water|education|agriculture|material)/gi) === null
+              && i < userInput.length){
+        userNeeds[userNeeds.length - 1].specifications += userInput[i + 1] + " ";
+        i++;
       }
     }
   }
