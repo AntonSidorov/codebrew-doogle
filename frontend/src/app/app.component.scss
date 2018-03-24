@@ -28,12 +28,17 @@
     padding: 0;
 }
 
-.login,.upload {
+.login,
+.upload {
     position: relative;
 }
 
-.map{
-  height: calc(100vh - 8rem);
-  margin: 0 2rem;
-  margin-top: 2rem;
+.map {
+    height: calc(100vh - 8rem);
+    margin: 0 2rem;
+    margin-top: 2rem;
+    transition: none;
+    /deep/ * {
+        transition: none;
+    }
 }

@@ -13,10 +13,13 @@ import { AppState } from './state';
   ]
 })
 export class AppComponent implements AfterViewInit, OnInit {
-
+  lat = 13.253179;
+  lng = 18.123326;
+  zoom = 6;
   login = false;
   upload = false;
   auth = this.store.select(AUTH.state);
+
 
   constructor(private store: Store<AppState>) {
 
