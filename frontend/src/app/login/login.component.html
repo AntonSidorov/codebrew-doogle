@@ -1,0 +1,32 @@
+<!-- <a class='login-btn facebook' mat-raised-button (click)='login("facebook")'>
+  <mat-icon svgIcon='facebook'></mat-icon> Sign in with Facebook</a>
+<a class='login-btn' mat-raised-button (click)='login("google")'>
+  <mat-icon svgIcon='google'></mat-icon> Sign in with Google</a>
+<div class="login-email" *ngIf='!(reset | async)'>
+  <ng-container *ngIf='currentTab | async as tab'>
+    <div class="tabs">
+      <div class="tab" *ngFor='let tabText of tabs' [class.active]='tab == tabText' (click)='switchTab(tabText)'>{{tabText}}</div>
+    </div>
+    <mat-form-field>
+      <input matInput placeholder='Email address' [(ngModel)]='user.email'>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [type]='password ? "password": "text"' placeholder='Password' [(ngModel)]='user.password' (keyup.enter)='emailLogin(tab)'>
+      <a mat-icon-button matSuffix (click)='password = !password'>
+        <mat-icon>{{ password ? 'visibility' : 'visibility_off'}}</mat-icon>
+      </a>
+    </mat-form-field>
+    <a mat-raised-button (click)='emailLogin(tab)'>{{(tab)}}</a>
+
+  </ng-container>
+</div>
+<a class='reset-toggle' *ngIf='!(reset | async)' (click)='toggleReset()'>Forgot password?</a>
+<div class="login-reset" *ngIf='reset | async'>
+  <h5>Password reset</h5>
+  <mat-form-field>
+    <input matInput placeholder='Email Address' email='true' [ngModel]='user.email' (input)='user.email = $event.target.value'
+      #email='ngModel' (keyup.enter)='email.errors ? "": resetPassword()'>
+  </mat-form-field>
+  <button mat-raised-button color='primary' type='button' [disabled]='email.errors' (click)='resetPassword()'>Reset password</button>
+  <button type='button' class='au-btn au-fill au-outline au-accent' (click)='toggleReset()'>Cancel</button>
+</div> -->

@@ -1,0 +1,16 @@
+{
+  "files.exclude": {
+    // "e2e/**": true,
+    // ".editorconfig": true,
+    // "protractor.conf.js": true,
+    // "tslint.json": true,
+    // "tsconfig.json": true,
+    // "karma.conf.js": true,
+    // ".angular-cli.json": false,
+    // ".firebaserc": true,
+    // "src/tsconfig.app.json": true,
+    // "src/tsconfig.spec.json": true,
+    // "src/typings.d.ts": true,
+    // "src/test.ts": true
+  }
+}

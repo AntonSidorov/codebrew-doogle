@@ -1,0 +1,88 @@
+{
+  "ngrx_actions_setup": {
+    "prefix": "ngrx-actions",
+    "body": ["import { Action } from '@ngrx/store';", "", "export type All = $1;"],
+    "description": "(ngrx) Sets up an empty .action.ts file"
+  },
+  "ngrx_actions_new": {
+    "prefix": "ngrx-action",
+    "body": [
+      "export const ${5:${4:${TM_FILENAME/((?:.*)*)\\.actions.ts/${1:/upcase}/}}_${1:ACTION}} = '[$4] $2';",
+      "export class ${6:${TM_FILENAME/((?:.*)*)\\.actions.ts/${1:/capitalize}/}}${2:Action} implements Action {",
+      "\treadonly type = $5",
+      "\tconstructor(${3| ,public payload: any|}){",
+      "\t\t$0",
+      "\t}",
+      "}"
+    ],
+    "description": "(ngrx) Creates a new action"
+  },
+  "ngrx_reducer_new": {
+    "prefix": "ngrx-reducer",
+    "body": [
+      "import { ${1:${TM_FILENAME/((?:.*)*)\\.reducer.ts/${1:/capitalize}/}}State } from '../state/${2:${TM_FILENAME/((?:.*)*)\\.reducer.ts/${1:/downcase}/}}.state';",
+      "import { $1Actions } from '../actions';",
+      "",
+      "export type Action = $1Actions.All;",
+      "",
+      "export function $2Reducer(state: $1State = $1State.Empty, action: Action){",
+      "\tswitch(action.type){",
+      "\t\t$0",
+      "\t\tdefault: return state;",
+      "\t}",
+      "}"
+    ],
+    "description": "(ngrx) Creates a new reducer"
+  },
+  "ngrx_reducer_sub": {
+    "prefix": "ngrx-subreducer",
+    "body": [
+      "export function ${1:object}Reducer(state: ${2:${TM_FILENAME/((?:.*)*)\\.reducer.ts/${1:/capitalize}/}}State = $2State.Empty, action: Action){",
+      "\treturn state;$0",
+      "}"
+    ],
+    "description": "(ngrx) Creates a new sub reducer"
+  },
+  "ngrx_state_new": {
+    "prefix": "ngrx-state",
+    "body": [
+      "export class ${1:${TM_FILENAME/((?:.*)*)\\.state.ts/${1:/capitalize}/}}State{",
+      "\tpublic static Empty: $1State = {};",
+      "\t$0",
+      "\tpublic static Default(): $1State{",
+      "\treturn this.Empty;",
+      "\t}",
+      "}"
+    ],
+    "description": "(ngrx) Creates a new ngrx state."
+  },
+  "ngrx_effects_setup": {
+    "prefix": "ngrx-effects",
+    "body": [
+      "import { Injectable } from '@angular/core';",
+      "import { Actions, Effect } from '@ngrx/effects';",
+      "import { Action } from '@ngrx/store';",
+      "import { Observable } from 'rxjs/Observable';",
+      "import '../rxjs';",
+      "",
+      "import * as ${1:${TM_FILENAME/((?:.*)*)\\.effects.ts/${1:/capitalize}/}}Actions from '../actions/${2:${TM_FILENAME/((?:.*)*)\\.effects.ts/${1:/downcase}/}}.actions';",
+      "",
+      "@Injectable()",
+      "export class $1Effects {",
+      "\t$0",
+      "\tconstructor(private actions: Actions) { }",
+      "}",
+      ""
+    ]
+  },
+  "ngrx_effects_new": {
+    "prefix": "ngrx-effect",
+    "body": [
+      "@Effect()",
+      "public ${1:effect} = this.actions.ofType(${5:${TM_FILENAME/((?:.*)*)\\.effects.ts/${1:/capitalize}/}}Actions.${5:${TM_FILENAME/((?:.*)*)\\.effects.ts/${1:/upcase}/}}_${2:ACTION})",
+      "\t.map((${3:payload}: ${4:any}) => {",
+      "\t\t$0",
+      "});"
+    ]
+  }
+}

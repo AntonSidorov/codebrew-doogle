@@ -1,0 +1,4 @@
+@import '~@angular/material/theming';
+$primary: mat-palette($mat-deep-orange);
+$accent : mat-palette($mat-blue, A700, A400, 900);
+$warn: mat-palette($mat-red);
