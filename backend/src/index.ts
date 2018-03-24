@@ -3,28 +3,27 @@
 import * as express from "express";
 import * as http from "http";
 import * as fs from "fs";
-var TelstraMessaging = require('Telstra_Messaging');
+var TelstraMessaging = require("Telstra_Messaging");
 
 let app = express(),
   port = 5001,
   url = "";
 
 let sendingInfo = {
- "to":"+61404405050",
- "body":"AIDS IS COMING",
- "from": "+61412345678",
- "validity": 5,
- "scheduledDelivery": 1,
- "notifyURL": "http://128.250.0.221:5001/response",
- "replyRequest": false
-}
-
+  to: "+61404405050",
+  body: "AIDS IS COMING",
+  from: "+61412345678",
+  validity: 5,
+  scheduledDelivery: 1,
+  notifyURL: "http://128.250.0.221:5001/response",
+  replyRequest: false
+};
 
 var defaultClient = TelstraMessaging.ApiClient.instance;
 
 // Configure OAuth2 access token for authorization: auth
-var auth = defaultClient.authentications['auth'];
-auth.accessToken = 'yqjgTVgfqE9hAlGwRgxm9ETqtrTP';
+var auth = defaultClient.authentications["auth"];
+auth.accessToken = "yqjgTVgfqE9hAlGwRgxm9ETqtrTP";
 
 var apiInstance = new TelstraMessaging.MessagingApi();
 
@@ -36,14 +35,12 @@ payload.notifyURL = sendingInfo.notifyURL;
 
 var callback = function(error, data, response) {
   if (error) {
-    console.log('---------------------------------------------------');
+    console.log("---------------------------------------------------");
     console.error(error);
   } else {
-    console.log('API called successfully. Returned data: ' + data);
+    console.log("API called successfully. Returned data: " + data);
   }
 };
-
-apiInstance.sendSMS(payload, callback);
 
 //end telstra code
 
@@ -54,13 +51,17 @@ app.use(express.static("static"));
 
 httpServer.listen(port);
 httpServer.on("error", err => {
-  console.log("dun fucked up")
+  console.log("dun fucked up");
 });
 
 httpServer.on("listening", () => console.log(`Listening on port ${port}...`));
 
 app.get("/", (req, res) => {
   res.send("Hi from the final beta build test!");
+});
+app.get("/call", (req, res) => {
+  apiInstance.sendSMS(payload, callback);
+  res.send("Sent SMS");
 });
 
 let genHeaders = (req, res) => {
@@ -70,10 +71,9 @@ let genHeaders = (req, res) => {
   res.header("Access-Control-Allow-Credentials", "true");
 };
 
-app.get("/search", (req, res) => {
-});
+app.get("/search", (req, res) => {});
 
-app.post("/response", (req, res) =>{
+app.post("/response", (req, res) => {
   console.log(JSON.stringify(req));
   res.status(200).send();
 });
