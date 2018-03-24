@@ -10,7 +10,8 @@ let app = express(),
   url = "";
 
 let sendingInfo = {
-  to: "+61404405050",
+  // to: "+61404405050",
+  to: "+6402111808",
   body: "AIDS IS COMING v2",
   from: "+61412345678",
   validity: 5,
@@ -48,6 +49,7 @@ app.set("port", port);
 let httpServer = http.createServer(app);
 
 app.use(express.static("static"));
+app.use(express.json());
 
 httpServer.listen(port);
 httpServer.on("error", err => {
