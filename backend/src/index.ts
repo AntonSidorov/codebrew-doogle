@@ -10,8 +10,8 @@ let app = express(),
   url = "";
 
 let sendingInfo = {
-// to: "+61404405050",
-  to: "+6402111808",
+  to: "+61404405050",
+  // to: "+6402111808",
   body: "AIDS IS COMING v2",
   from: "+61412345678",
   validity: 5,
@@ -39,7 +39,9 @@ var callback = function(error, data, response) {
     console.log("---------------------------------------------------");
     console.error(error);
   } else {
-    console.log("API called successfully. Returned data: " + JSON.stringify(data));
+    console.log(
+      "API called successfully. Returned data: " + JSON.stringify(data)
+    );
   }
 };
 
