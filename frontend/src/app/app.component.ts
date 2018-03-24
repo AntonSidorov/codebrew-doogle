@@ -20,6 +20,7 @@ export class AppComponent implements AfterViewInit, OnInit {
   upload = false;
   auth = this.store.select(AUTH.state);
 
+  overlays: { left: boolean, right: boolean } = { left: false, right: false };
 
   constructor(private store: Store<AppState>) {
 
@@ -32,7 +33,13 @@ export class AppComponent implements AfterViewInit, OnInit {
 
   toggleLogin = () => { this.login = !this.login; this.upload = false; };
   toggleUpload = () => { this.upload = !this.upload; this.login = false; };
-
+  toggleOverlay = (left) => {
+    if (left)
+      this.overlays.left = !this.overlays.left;
+    else
+      this.overlays.right = !this.overlays.right;
+    console.log(this.overlays);
+  }
   // @HostListener('window:resize', ['$event'])
   // onResize = event => this.store.dispatch(new UiWindowResize(event.target.innerWidth, event.target.innerHeight));
 }

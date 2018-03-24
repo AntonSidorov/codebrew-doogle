@@ -10,7 +10,7 @@
         <a class="upload-toggle" (click)='toggleUpload()' mat-icon-button color="primary">
           <mat-icon>cloud_upload</mat-icon>
         </a>
-        <app-upload *ngIf='upload' class='mat-elevation-z3'></app-upload>
+        <app-upload *ngIf='upload' class='mat-elevation-z10'></app-upload>
       </div>
       <div class="login" *ngIf='!auth.authenticated'>
         <a class="login-toggle" (click)='toggleLogin()' mat-icon-button color="primary">
@@ -22,7 +22,25 @@
   </div>
 </nav>
 
+<mat-form-field class='search-container'>
+  <input class='search' type="text" matInput placeholder='Search communities...'>
+</mat-form-field>
+
 <div class="map-container">
+  <div class="anchor">
+    <div class="left map-overlay" [class.open]='overlays.left'>
+      <div class="map-overlay-content mat-elevation-z5"></div>
+      <a mat-icon-button color="primary" class="mat-elevation-z7 map-overlay-button" (click)='toggleOverlay(true)'>
+        <mat-icon>{{overlays.left ? 'keyboard_arrow_left' : 'keyboard_arrow_right'}}</mat-icon>
+      </a>
+    </div>
+    <div class="right map-overlay" [class.open]='overlays.right'>
+      <a mat-icon-button color="primary" class="mat-elevation-z7 map-overlay-button" (click)='toggleOverlay(false)'>
+        <mat-icon>{{overlays.right ? 'keyboard_arrow_right' : 'keyboard_arrow_left'}}</mat-icon>
+      </a>
+      <div class="map-overlay-content mat-elevation-z5"></div>
+    </div>
+  </div>
   <agm-map class='map' [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false">
     <agm-circle [latitude]="lat + 0.3" [longitude]="lng" [radius]="50000" [fillColor]="'red'" [circleDraggable]="false" [editable]="false">
     </agm-circle>
@@ -39,14 +57,5 @@
       </agm-info-window>
     </agm-marker>
   </agm-map>
-  <div class="anchor">
-    <div class="left-box">
 
-    </div>
-    <div class="right-box">
-
-    </div>
-
-
-  </div>
 </div>
