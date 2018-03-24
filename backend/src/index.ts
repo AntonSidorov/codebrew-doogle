@@ -3,11 +3,28 @@
 import * as express from "express";
 import * as http from "http";
 import * as fs from "fs";
-var TelstraMessaging = require("Telstra_Messaging");
+const admin = require('firebase-admin');
+const functions = require('firebase-functions');
+const TelstraMessaging = require("Telstra_Messaging");
+import { Helper } from './classes/helper';
 
 let app = express(),
   port = 5001,
   url = "";
+
+var serviceAccount = require('./service.json');
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: 'https://open-aid-2.firebaseio.com/'
+});
+
+const defaultApp = admin.initializeApp(functions.config().firebase);
+
+let defaultAuth = defaultApp.auth();
+let defaultDatabase = defaultApp.database();
+
+
 
 let sendingInfo = {
   to: "+61404405050",
@@ -76,6 +93,7 @@ let genHeaders = (req, res) => {
 app.get("/search", (req, res) => {});
 
 app.post("/response", (req, res) => {
+  const fromNumber = req.body.from;
   console.log(req.body);
   let userInput = req.body.body.split(/[ \n\t\\\r\./,-]/gi);
   console.log('Got a message:' + JSON.stringify(userInput));
@@ -105,9 +123,33 @@ app.post("/response", (req, res) => {
     apiInstance.sendSMS(payload, callback);
   }
   console.log(userNeeds);
+  defaultDatabase.ref('communities/0/requests').push().set({
+    fromNumber: {
+      description: userNeeds,
+      peopleAffected: 100 + Math.floor(Helper.randomNumber(0, 13)),
+      geoData: {
+        lat: -37.797705 + Helper.randomNumber(-0.0005, 0.0005),
+        long: 144.958773 + Helper.randomNumber(-0.0005, 0.0005),
+        radius: 33
+      },
+      name: "User Request",
+      urgency: getUrgency(),
+      workersRequested: Math.floor(Helper.randomNumber(5, 10))
+    }
+  });
   res.status(200).send();
 });
 
+const getUrgency = () => {
+  const num = Helper.randomNumber(0,1);
+  if (num < 0.3){
+    return "LOW";
+  } else if (num < 0.6) {
+    return "MEDIUM";
+  } else {
+    return "HIGH";
+  }
+}
 // https://www.npmjs.com/package/telstra-messaging
 
 // app.get("/phoneactivate", function(req, res) {
