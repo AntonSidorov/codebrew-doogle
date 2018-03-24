@@ -2,7 +2,7 @@ import { LoginComponent } from './login/login.component';
 import { environment } from '../environments/environment';
 
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, ApplicationRef } from '@angular/core';
+import { NgModule, ApplicationRef, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -73,7 +73,9 @@ import { UploadComponent } from './upload/upload.component';
     // { provide: OverlayContainer, useClass: FullscreenOverlayContainer },
     { provide: RouterStateSerializer, useClass: SimpleSerializer },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas:
+  [NO_ERRORS_SCHEMA]
 })
 export class AppModule {
   constructor(public appRef: ApplicationRef, private _store: Store<AppState>) { }

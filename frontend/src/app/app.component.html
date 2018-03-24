@@ -41,13 +41,14 @@
       <div class="map-overlay-content mat-elevation-z5"></div>
     </div>
   </div>
-  <agm-map #map class='map' [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false">
+  <agm-map #gmap class='map' [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false"
+    (mapClick)='mapClick(gmap)'>
     <ng-container *ngFor='let request of requests'>
-      <agm-circle *ngIf='request' [latitude]='request.geoData.lat' [longitude]='request.geoData.long' [radius]='request.geoData.radius'
-        [fillColor]='"red"'></agm-circle>
-      <agm-info-window [latitude]='request.geoData.lat' [longitude]='request.geoData.long'>
+      <agm-info-window #request.iw [latitude]='request.geoData.lat' [longitude]='request.geoData.long' [request]='request'>
         {{request.description}}
       </agm-info-window>
+      <agm-circle *ngIf='request' [latitude]='request.geoData.lat' (circleClick)="toggleInfo(iw, gmap)" [longitude]='request.geoData.long'
+        [radius]='request.geoData.radius' [fillColor]='"red"'></agm-circle>
     </ng-container>
     <!-- <agm-circle [latitude]="lat + 1" [longitude]="lng + 1" [radius]="50000" [fillColor]="'red'" [circleDraggable]="false" [editable]="false">
     </agm-circle>
