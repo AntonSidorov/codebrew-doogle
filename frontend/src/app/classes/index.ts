@@ -48,12 +48,12 @@ let user_gen = (id, email, name, password) => ({
 let request_gen = (name, desc, req): AidRequest => ({
   geoData: geoData_gen(13, 18),
   name,
-  shortDescription: desc.slice(0, 15),
+  shortDescription: desc.slice(0, 150),
   description: desc,
-  workersRequested: req,
+  workersRequested: ~~req,
   type: Helper.randomItem(['Medical', 'Sanitation', 'Water', 'Education', 'Agriculture']),
   workers: [],
-  peopleAffected: Helper.randomNumber(10, 1000),
+  peopleAffected: ~~Helper.randomNumber(10, 1000),
   urgency: Helper.randomItem(['LOW', 'MEDIUM', 'HIGH'])
 });
 

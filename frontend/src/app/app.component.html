@@ -28,8 +28,24 @@
 
 <div class="map-container">
   <div class="anchor">
-    <div class="left map-overlay" [class.open]='overlays.left'>
-      <div class="map-overlay-content mat-elevation-z5"></div>
+    <div class="left map-overlay" [class.open]='true'>
+      <div class="map-overlay-content mat-elevation-z5 requests">
+        <div *ngFor='let request of requests' class='request' [ngClass]='request.urgency.toLowerCase()' (click)='openIW(request)'>
+          <div class="request-name">
+            {{request.name}}
+          </div>
+          <div class="request-description">
+            {{request.shortDescription}}
+          </div>
+          <div class="request-stats">
+            <div class="request-stat">
+              <mat-icon>person</mat-icon> {{request.peopleAffected}}</div>
+            <div class="request-stat">
+              <mat-icon>work</mat-icon> {{request.workersRequested}}
+            </div>
+          </div>
+        </div>
+      </div>
       <a mat-icon-button color="primary" class="mat-elevation-z7 map-overlay-button" (click)='toggleOverlay(true)'>
         <mat-icon>{{overlays.left ? 'keyboard_arrow_left' : 'keyboard_arrow_right'}}</mat-icon>
       </a>
@@ -44,26 +60,12 @@
   <agm-map #gmap class='map' [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false"
     (mapClick)='mapClick(gmap)'>
     <ng-container *ngFor='let request of requests'>
-      <agm-info-window #request.iw [latitude]='request.geoData.lat' [longitude]='request.geoData.long' [request]='request'>
+      <agm-info-window #iw [latitude]='request.geoData.lat' [longitude]='request.geoData.long' [request]='request'>
         {{request.description}}
       </agm-info-window>
       <agm-circle *ngIf='request' [latitude]='request.geoData.lat' (circleClick)="toggleInfo(iw, gmap)" [longitude]='request.geoData.long'
         [radius]='request.geoData.radius' [fillColor]='"red"'></agm-circle>
     </ng-container>
-    <!-- <agm-circle [latitude]="lat + 1" [longitude]="lng + 1" [radius]="50000" [fillColor]="'red'" [circleDraggable]="false" [editable]="false">
-    </agm-circle>
-    <agm-circle [latitude]="lat - 0.3" [longitude]="lng" [radius]="50000" [fillColor]="'#06f'" [circleDraggable]="false" [editable]="false">
-    </agm-circle>
-    <agm-marker [latitude]="lat + 0.3" [longitude]="lng">
-      <agm-info-window>
-        <strong>InfoWindow content</strong>
-      </agm-info-window>
-    </agm-marker>
-    <agm-marker [latitude]="lat - 0.3" [longitude]="lng">
-      <agm-info-window>
-        <i>InfoWindow content</i>
-      </agm-info-window>
-    </agm-marker> -->
   </agm-map>
 
 </div>

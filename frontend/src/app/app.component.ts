@@ -1,3 +1,4 @@
+import { AidRequest } from './classes/index';
 import { Helper } from './classes/helper';
 import { fake } from './classes';
 import { AUTH } from './state/selectors';
@@ -30,7 +31,9 @@ export class AppComponent implements AfterViewInit, OnInit {
   @ViewChildren('iw')
   infoWindows: QueryList<any>;
 
-  requests = [];
+  requests: AidRequest[] = [];
+
+  requestInfoWindowMap: any[];
 
   overlays: { left: boolean, right: boolean } = { left: false, right: false };
 
@@ -38,16 +41,13 @@ export class AppComponent implements AfterViewInit, OnInit {
 
   }
 
-  test(ev) {
-    console.log(ev);
-  }
   log = (e) => console.log(e);
   mapClick = (gmap) => {
     console.log('toggleInfo')
     if (!this.openWindow) return;
     this.openWindow.close();
   }
-  toggleInfo(iw, gmap) {
+  toggleInfo(iw) {
     console.log('toggleInfo');
     if (!this.openWindow) {
       iw.open();
@@ -64,12 +64,28 @@ export class AppComponent implements AfterViewInit, OnInit {
   }
 
   ngAfterViewInit() {
+    this.infoWindows.changes.subscribe(r => this.handleIWs(this.infoWindows.toArray()));
+    this.handleIWs(this.infoWindows.toArray());
     setTimeout(() => {
-      console.log(this.requests);
+      this.requests = [].concat(...fake().communities.map(v => v.requests));
     }, 2000);
   }
+
+  handleIWs(infoWindows: any[]) {
+    let arr = {};
+    infoWindows.map(v => arr[`${v.latitude}${v.longitude}`] = { iw: v });
+    this.requests.map(v => arr[`${v.geoData.lat}${v.geoData.long}`] = { ...arr[`${v.geoData.lat}${v.geoData.long}`], req: v });
+    console.log(Object.values(arr));
+    this.requestInfoWindowMap = Object.values(arr);
+  }
+
+  openIW(req: AidRequest) {
+    this.toggleInfo(this.requestInfoWindowMap.find(r => r.req.geoData == req.geoData).iw)
+  }
+
+
   ngOnInit() {
-    this.requests = [].concat(...fake().communities.map(v => v.requests)).slice(0, 10);
+    this.requests = [].concat(...fake().communities.map(v => v.requests)).slice(0, 25);
   }
 
   toggleLogin = () => { this.login = !this.login; this.upload = false; };
