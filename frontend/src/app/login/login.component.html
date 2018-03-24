@@ -1,14 +1,21 @@
 <div class="login">
   <h3>Login</h3>
   <mat-form-field>
-    <input matInput type="text" placeholder="Email address">
+    <input matInput type="text" placeholder="Email address" [(ngModel)]='email'>
   </mat-form-field>
   <mat-form-field>
-    <input matInput type="password" placeholder="Password">
+    <input matInput type="password" placeholder="Password" [(ngModel)]='password'>
   </mat-form-field>
-  <a color="primary" mat-raised-button>Log in</a>
+  <a color="primary" mat-raised-button (click)='login()'>Log in</a>
 </div>
 
+<!--
+LOGINS:
+chadaidworker@gmail.com : Chaddyworker
+chadCharity@gmail.com : ChaddyCharity
+sudanCharity@gmail.com : SudanCharity
+melbourneThing@gmail.com : melbourneThing
+ -->
 <!-- <a class='login-btn facebook' mat-raised-button (click)='login("facebook")'>
   <mat-icon svgIcon='facebook'></mat-icon> Sign in with Facebook</a>
 <a class='login-btn' mat-raised-button (click)='login("google")'>

@@ -7,7 +7,7 @@
   <div class="right">
     <ng-container *ngIf='auth | async as auth'>
       <div class="upload">
-        <a class="upload-toggle" (click)='toggleUpload()' mat-icon-button color="primary">
+        <a class="upload-toggle" (click)='toggleUpload()' *ngIf='auth.authenticated' mat-icon-button color="primary">
           <mat-icon>cloud_upload</mat-icon>
         </a>
         <app-upload *ngIf='upload' class='mat-elevation-z10'></app-upload>
@@ -18,6 +18,9 @@
         </a>
         <app-login *ngIf='login' class='mat-elevation-z3'></app-login>
       </div>
+      <a class="logout-button" (click)='logout()' *ngIf='auth.authenticated' mat-icon-button color="primary">
+        <mat-icon>exit_to_app</mat-icon>
+      </a>
     </ng-container>
   </div>
 </nav>
@@ -45,7 +48,7 @@
                   <div class="request-name">
                     {{request.name}}
                   </div>
-                  <div class="request-stats">
+                  <div class="request-stats" *ngIf='request.peopleAffected || request.workersRequested'>
                     <div class="request-stat">
                       <mat-icon>person</mat-icon> {{request.peopleAffected}}</div>
                     <div class="request-stat">
@@ -73,7 +76,20 @@
     (mapClick)='this.openWindow?.close()'>
     <ng-container *ngFor='let request of requests | async'>
       <agm-info-window #iw [latitude]='request.geoData.lat' [longitude]='request.geoData.long' [request]='request'>
-        {{request.description}}
+        <div class="request-description">
+          {{request.description}}
+        </div>
+        <div class="actions">
+          <a class='action join' (click)='join(request)' mat-raised-button color="primary">
+            Join
+          </a>
+          <a class='action leave' (click)='leave(request)' mat-raised-button color="primary">
+            Leave
+          </a>
+          <a class='action complete' (click)='complete(request)' mat-raised-button color="primary">
+            Complete
+          </a>
+        </div>
       </agm-info-window>
       <agm-circle *ngIf='request' [latitude]='request.geoData.lat' (circleClick)="toggleInfo(iw, gmap)" [longitude]='request.geoData.long'
         [radius]='request.geoData.radius' [fillColor]='request.urgency == "HIGH" ? "red": request.urgency == "MEDIUM" ? "#c39c00": "#2fff2f"'></agm-circle>

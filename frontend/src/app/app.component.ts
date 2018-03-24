@@ -9,6 +9,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from './state';
 import { GoogleMapsAPIWrapper } from '@agm/core';
 import { InfoWindow } from '@agm/core/services/google-maps-types';
+import { AuthLogOut } from './actions/auth.actions';
 
 @Component({
   selector: 'app-root',
@@ -89,6 +90,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     this.store.dispatch(new DataCommunitiesLoad());
   }
 
+  logout = () => this.store.dispatch(new AuthLogOut());
   toggleLogin = () => { this.login = !this.login; this.upload = false; };
   toggleUpload = () => { this.upload = !this.upload; this.login = false; };
   toggleOverlay = (left) => {

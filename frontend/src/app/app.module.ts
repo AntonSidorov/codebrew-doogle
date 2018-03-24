@@ -46,6 +46,7 @@ import { ListComponent } from './list/list.component';
 import { FiltersComponent } from './filters/filters.component';
 import { UploadComponent } from './upload/upload.component';
 import { DbService } from './db.service';
+import { AuthService } from './auth.service';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, ListComponent, FiltersComponent, UploadComponent],
@@ -83,6 +84,7 @@ import { DbService } from './db.service';
     /* services */
     // { provide: OverlayContainer, useClass: FullscreenOverlayContainer },
     DbService,
+    AuthService,
     { provide: RouterStateSerializer, useClass: SimpleSerializer, },
   ],
   bootstrap: [AppComponent],
