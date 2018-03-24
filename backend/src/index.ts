@@ -74,7 +74,7 @@ let genHeaders = (req, res) => {
 app.get("/search", (req, res) => {});
 
 app.post("/response", (req, res) => {
-  console.log(JSON.stringify(req));
+  console.log(JSON.stringify(req.body));
   res.status(200).send();
 });
 
