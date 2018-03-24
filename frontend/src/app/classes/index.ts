@@ -57,24 +57,73 @@ export let fake: FakeData = {
           peopleAffected: 23,
           date: 1521880873,
           urgency: 'MEDIUM'
-        },
+        }],
+        location:
+          {
+            geoData: {
+            lat: 11.5088255,
+            long: 42.1016962,
+            radius: 10
+            },
+          }
+      }
+      {
+        names: ['Jabari'],
+        requests: [
+          {
+            geoData: {
+              lat: 8.911533,
+              long: 35.50364,
+              radius: 23
+            },
+            name: 'School Books needed',
+            shortDescription: 'Primary School kids need books for school.',
+            description: "Book donations needed for primary school kids aged 7-10. Main concerns are mathematics and English.",
+            workersRequested: 1,
+            type: 'Education',
+            workers: [],
+            peopleAffected: 7,
+            date: 1521817591,
+            urgency: 'LOW'
+          }],
+          location:
+            {
+              geoData: {
+                lat: 8.911533,
+                long: 35.50364,
+                radius: 23
+              },
+            }
+        }
         {
-          geoData: {
-            lat: 8.911533,
-            long: 35.50364,
-            radius: 23
-          },
-          name: 'School Books needed',
-          shortDescription: 'Primary School kids need books for school.',
-          description: "Book donations needed for primary school kids aged 7-10. Main concerns are mathematics and English.",
-          workersRequested: 1,
-          type: 'Education',
-          workers: [],
-          peopleAffected: 7,
-          date: 1521817591,
-          urgency: 'LOW'
-        },
-
+          names: ['David'],
+          requests: [
+            {
+              geoData: {
+                lat: 8.917669,
+                long: 35.75499,
+                radius: 27
+              },
+              name: 'Food Shortage',
+              shortDescription: 'Food shortage due to floods.',
+              description: "Floods have destroyed crops in the region and has resulted in food shortages. Food needed to be sent to a small village of 50 people in the next week",
+              workersRequested: 4,
+              type: 'Food',
+              workers: ['Tim Morton'],
+              peopleAffected: 50,
+              date: 1521880998,
+              urgency: 'HIGH'
+            },],
+            location:
+              {
+                geoData: {
+                  lat: 8.911533,
+                  long: 35.50364,
+                  radius: 23
+                },
+              }
+          }
+      }
       ],
       location: {
         lat: 11.5088255,
