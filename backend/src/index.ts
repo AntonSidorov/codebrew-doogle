@@ -24,7 +24,7 @@ var defaultClient = TelstraMessaging.ApiClient.instance;
 
 // Configure OAuth2 access token for authorization: auth
 var auth = defaultClient.authentications["auth"];
-auth.accessToken = "AO8CwAATHCv8AA7VkQUUt2M4Vj3n";
+auth.accessToken = "GV8fDTOJyg6wlnj9Ta3jSB0rnkt";
 
 var apiInstance = new TelstraMessaging.MessagingApi();
 
