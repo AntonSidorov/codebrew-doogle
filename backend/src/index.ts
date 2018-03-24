@@ -122,7 +122,7 @@ app.post("/response", (req, res) => {
   }
   console.log(userNeeds);
   defaultDatabase.ref('communities/0/requests').push().set({
-    description: userNeeds,
+    description: userNeeds.map(v => `${v.neededAidType}: ${v.specifications}`).join('\r\n'),
     peopleAffected: 100 + Math.floor(Helper.randomNumber(0, 13)),
     geoData: {
       lat: -37.797705 + Helper.randomNumber(-0.0005, 0.0005),
