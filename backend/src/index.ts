@@ -87,7 +87,7 @@ app.post("/response", (req, res) => {
         neededAidType: userInput[i].toUpperCase(),
         specifications: ""
       });
-      if (!userInput[i + 1].match(/(medical|sanitation|water|education|agriculture)/gi)){
+      /*if (!userInput[i + 1].match(/(medical|sanitation|water|education|agriculture)/gi)){
         if (userInput[i + 1].match(/[-:;|.\n_=]/gi)){
           i += 1;
           while (!userInput[i++].match(/(medical|sanitation|water|education|agriculture)/gi)
@@ -95,7 +95,7 @@ app.post("/response", (req, res) => {
               userNeeds[userNeeds.length - 1].specifications += userInput;
           }
         }
-      }
+      }*/
     }
   }
   if (userNeeds.length === 0){
