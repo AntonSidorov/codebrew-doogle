@@ -75,7 +75,7 @@ app.get("/search", (req, res) => {
 
 app.post("/response", (req, res) =>{
   console.log(req.body);
-  res.status(200).json();
+  res.status(200).send();
 });
 
 // https://www.npmjs.com/package/telstra-messaging
