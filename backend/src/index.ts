@@ -3,9 +3,49 @@
 import * as express from "express";
 import * as http from "http";
 import * as fs from "fs";
+var TelstraMessaging = require('Telstra_Messaging');
+
 let app = express(),
   port = 5001,
   url = "";
+
+let sendingInfo = {
+ "to":"+61404405050",
+ "body":"AIDS IS COMING",
+ "from": "+61412345678",
+ "validity": 5,
+ "scheduledDelivery": 1,
+ "notifyURL": "http://128.250.0.221:5001/response",
+ "replyRequest": false
+}
+
+
+var defaultClient = TelstraMessaging.ApiClient.instance;
+
+// Configure OAuth2 access token for authorization: auth
+var auth = defaultClient.authentications['auth'];
+auth.accessToken = 'yqjgTVgfqE9hAlGwRgxm9ETqtrTP';
+
+var apiInstance = new TelstraMessaging.MessagingApi();
+
+var payload = new TelstraMessaging.SendSMSRequest(); // SendSMSRequest | A JSON or XML payload containing the recipient's phone number and text message. The recipient number should be in the format '04xxxxxxxx' where x is a digit
+payload.body = sendingInfo.body;
+payload.to = sendingInfo.to;
+payload.from = sendingInfo.from;
+payload.notifyURL = sendingInfo.notifyURL;
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.log('---------------------------------------------------');
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+
+apiInstance.sendSMS(payload, callback);
+
+//end telstra code
 
 app.set("port", port);
 let httpServer = http.createServer(app);
@@ -14,6 +54,7 @@ app.use(express.static("static"));
 
 httpServer.listen(port);
 httpServer.on("error", err => {
+  console.log("dun fucked up")
 });
 
 httpServer.on("listening", () => console.log(`Listening on port ${port}...`));
@@ -30,6 +71,11 @@ let genHeaders = (req, res) => {
 };
 
 app.get("/search", (req, res) => {
+});
+
+app.post("/response", (req, res) =>{
+  console.log(req.body);
+  res.status(200).json();
 });
 
 // https://www.npmjs.com/package/telstra-messaging
