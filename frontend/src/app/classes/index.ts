@@ -58,12 +58,103 @@ export let fake: FakeData = {
           date: 1521880873,
           urgency: 'MEDIUM'
         },
+        {
+          geoData: {
+            lat: 8.911533,
+            long: 35.50364,
+            radius: 23
+          },
+          name: 'School Books needed',
+          shortDescription: 'Primary School kids need books for school.',
+          description: "Book donations needed for primary school kids aged 7-10. Main concerns are mathematics and English.",
+          workersRequested: 1,
+          type: 'Education',
+          workers: [],
+          peopleAffected: 7,
+          date: 1521817591,
+          urgency: 'LOW'
+        },
 
       ],
       location: {
         lat: 11.5088255,
         long: 42.1016962,
         radius: 10
+      },
+      {
+        lat: 8.911533,
+        long: 35.50364,
+        radius: 23
+      },
+      {
+        lat: 7.734086,
+        long: 34.962632,
+        radius: 23
+      },
+      {
+        lat: 7.152893,
+        long: 35.187059,
+        radius: 30
+      },
+      {
+        lat: 8.401973,
+        long: 32.926065,
+        radius: 20
+      },
+      {
+        lat: 8.482534,
+        long: 33.70414,
+        radius: 30
+      },
+      {
+        lat: 7.753959,
+        long: 32.862148,
+        radius: 30
+      },
+      {
+        lat: 8.917669,
+        long: 35.75499,
+        radius: 27
+      },
+      {
+        lat: 7.093353,
+        long: 31.734887,
+        radius: 27
+      },
+      {
+        lat: 7.625544,
+        long: 30.822197,
+        radius: 28
+      },
+      {
+        lat: 8.328135,
+        long: 32.229119,
+        radius: 33
+      },
+      {
+        lat: 8.647197,
+        long: 33.036423,
+        radius: 40
+      },
+      {
+        lat: 7.146104,
+        long: 30.73406,
+        radius: 39
+      },
+      {
+        lat: 7.148818,
+        long: 32.814558,
+        radius: 39
+      },
+      {
+        lat: 7.655479,
+        long: 33.087991,
+        radius: 32
+      },
+      {
+        lat: 7.102063,
+        long: 31.318859,
+        radius: 33
       }
     }
   ],
