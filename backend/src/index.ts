@@ -11,11 +11,11 @@ let app = express(),
 
 let sendingInfo = {
   to: "+61404405050",
-  body: "AIDS IS COMING",
+  body: "AIDS IS COMING v2",
   from: "+61412345678",
   validity: 5,
   scheduledDelivery: 1,
-  notifyURL: "http://128.250.0.221:5001/response",
+  notifyURL: "http://13.210.252.3:5001/response",
   replyRequest: false
 };
 
