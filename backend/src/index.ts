@@ -6,7 +6,7 @@ import * as fs from "fs";
 import * as admin from 'firebase-admin';
 const TelstraMessaging = require("Telstra_Messaging");
 import { Helper } from './classes/helper';
-var serviceAccount = require('../service-account.json');
+var serviceAccount = require('./service-account.json');
 
 
 admin.initializeApp({
