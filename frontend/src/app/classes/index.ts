@@ -38,113 +38,113 @@ export class FakeData {
 
 export let fake: FakeData = {
   communities: [
-      names
+
   ],
   users: [
 
-     {
+    {
       id: "1",
       email: "lyndacoates121@gmail.com",
       name: "Lynda Coates",
       password: "bigboi91",
-      onField: true;
+      onField: true
     }
     ,
     {
-     id: "2",
-     email: "felixclayton121@gmail.com",
-     name: "Felix Clayton",
-     password: "smallboy99",
-     onField: true;
-   }
-   ,
-   {
-    id: "3",
-    email: "LexKimster@hotmail.com",
-    name: "Lex Kim",
-    password: "mediumman356",
-    onField: true;
-  }
-  ,
-  {
-   id: "4",
-   email: "Timmortonmanster@gmail.com",
-   name: "Tim Morton",
-   password: "hiddenwords",
-   onField: true;
-  }
-  ,
-  {
-   id: "5",
-   email: "jameymilton@gmail.com",
-   name: "James Milton",
-   password: "bighorse1sd",
-   onField: true;
-  }
-  ,
-  {
-   id: "6",
-   email: "Bradlesbrad1@gmail.com",
-   name: "Brad Bradley",
-   password: "passthmeer",
-   onField: true;
-  }
-  ,
-  {
-   id: "7",
-   email: "initialmanfred@gmail.com",
-   name: "Sandy Henderson",
-   password: "Kushdestroey",
-   onField: true;
-  }
-  ,
-  {
-   id: "8",
-   email: "madmaxminter@gmail.com",
-   name: "Max Interly",
-   password: "hidemytracks",
-   onField: false;
-  }
-  ,
-  {
-   id: "9",
-   email: "superspy@gmail.com",
-   name: "James Bnod",
-   password: "callmebondjames",
-   onField: false;
-  }
-  ,
-  {
-   id: "10",
-   email: "nootnootmans@gmail.com",
-   name: "Emily Underson",
-   password: "billwatts",
-   onField: true;
-  }
-  ,
-  {
-   id: "11",
-   email: "reddevil@gmail.com",
-   name: "Carrol carls",
-   password: "mysecretsmine",
-   onField: true;
-  }
-  ,
-  {
-   id: "12",
-   email: "thedestroyer@gmail.com",
-   name: "Pete manman",
-   password: "8characters",
-   onField: true;
-  }
-  ,
-  {
-   id: "13",
-   email: "bigmanonline@gmail.com",
-   name: "Gunder Dunderson",
-   password: "Kushdestroeyss",
-   onField: true;
-  }
+      id: "2",
+      email: "felixclayton121@gmail.com",
+      name: "Felix Clayton",
+      password: "smallboy99",
+      onField: true
+    }
+    ,
+    {
+      id: "3",
+      email: "LexKimster@hotmail.com",
+      name: "Lex Kim",
+      password: "mediumman356",
+      onField: true
+    }
+    ,
+    {
+      id: '4',
+      email: 'Timmortonmanster@gmail.com',
+      name: 'Tim Morton',
+      password: 'hiddenwords',
+      onField: true
+    }
+    ,
+    {
+      id: '5',
+      email: 'jameymilton@gmail.com',
+      name: 'James Milton',
+      password: 'bighorse1sd',
+      onField: true
+    }
+    ,
+    {
+      id: '6',
+      email: 'Bradlesbrad1@gmail.com',
+      name: 'Brad Bradley',
+      password: 'passthmeer',
+      onField: true
+    }
+    ,
+    {
+      id: '7',
+      email: 'initialmanfred@gmail.com',
+      name: 'Sandy Henderson',
+      password: 'Kushdestroey',
+      onField: true
+    }
+    ,
+    {
+      id: '8',
+      email: 'madmaxminter@gmail.com',
+      name: 'Max Interly',
+      password: 'hidemytracks',
+      onField: false,
+    }
+    ,
+    {
+      id: '9',
+      email: 'superspy@gmail.com',
+      name: 'James Bnod',
+      password: 'callmebondjames',
+      onField: false,
+    }
+    ,
+    {
+      id: '10',
+      email: 'nootnootmans@gmail.com',
+      name: 'Emily Underson',
+      password: 'billwatts',
+      onField: true
+    }
+    ,
+    {
+      id: '11',
+      email: 'reddevil@gmail.com',
+      name: 'Carrol carls',
+      password: 'mysecretsmine',
+      onField: true
+    }
+    ,
+    {
+      id: '12',
+      email: 'thedestroyer@gmail.com',
+      name: 'Pete manman',
+      password: '8characters',
+      onField: true
+    }
+    ,
+    {
+      id: '13',
+      email: 'bigmanonline@gmail.com',
+      name: 'Gunder Dunderson',
+      password: 'Kushdestroeyss',
+      onField: true
+    }
 
   ]
 };
