@@ -89,7 +89,7 @@ app.post("/response", (req, res) => {
       });
       while (!userInput[i++].match(/(medical|sanitation|water|education|agriculture)/gi)
             && i < userInput.length){
-        userNeeds[userNeeds.length - 1].specifications += userInput;
+        userNeeds[userNeeds.length - 1].specifications += userInput[i];
       }
     }
   }
