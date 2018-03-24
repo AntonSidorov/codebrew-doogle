@@ -74,7 +74,7 @@ app.get("/search", (req, res) => {
 });
 
 app.post("/response", (req, res) =>{
-  console.log(req.body);
+  console.log(JSON.stringify(req));
   res.status(200).send();
 });
 
