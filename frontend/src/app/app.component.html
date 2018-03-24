@@ -41,8 +41,15 @@
       <div class="map-overlay-content mat-elevation-z5"></div>
     </div>
   </div>
-  <agm-map class='map' [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false">
-    <agm-circle [latitude]="lat + 0.3" [longitude]="lng" [radius]="50000" [fillColor]="'red'" [circleDraggable]="false" [editable]="false">
+  <agm-map #map class='map' [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false">
+    <ng-container *ngFor='let request of requests'>
+      <agm-circle *ngIf='request' [latitude]='request.geoData.lat' [longitude]='request.geoData.long' [radius]='request.geoData.radius'
+        [fillColor]='"red"'></agm-circle>
+      <agm-info-window [latitude]='request.geoData.lat' [longitude]='request.geoData.long'>
+        {{request.description}}
+      </agm-info-window>
+    </ng-container>
+    <!-- <agm-circle [latitude]="lat + 1" [longitude]="lng + 1" [radius]="50000" [fillColor]="'red'" [circleDraggable]="false" [editable]="false">
     </agm-circle>
     <agm-circle [latitude]="lat - 0.3" [longitude]="lng" [radius]="50000" [fillColor]="'#06f'" [circleDraggable]="false" [editable]="false">
     </agm-circle>
@@ -55,7 +62,7 @@
       <agm-info-window>
         <i>InfoWindow content</i>
       </agm-info-window>
-    </agm-marker>
+    </agm-marker> -->
   </agm-map>
 
 </div>
