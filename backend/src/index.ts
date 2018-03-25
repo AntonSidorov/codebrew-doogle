@@ -148,9 +148,9 @@ app.post("/response", (req, res) => {
   if (userNeeds.length === 0) {
     payload.body = "Sorry. we cant help you 😂 \n" + 
     "please try again in the format of: \n" + 
-    "categorie1 - specific needs \n";
+    "category specific needs \n";
   } else {
-    payload.body = "Thanks for your contribution 😎";
+    payload.body = "Thanks for your contribution. If you weren't honest, we know where to find you 😂";
   }
 
   console.log(token);

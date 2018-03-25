@@ -80,6 +80,7 @@
     <ng-container *ngIf='requests | async as requests'>
       <ng-container *ngFor='let request of requests'>
         <agm-info-window #iw [latitude]='request.geoData.lat' [longitude]='request.geoData.long' [request]='request'>
+          <h3>{{request.name}}</h3>
           <div class="request-description">
             {{request.description}}
           </div>
