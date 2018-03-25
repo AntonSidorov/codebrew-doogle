@@ -58,6 +58,9 @@ var authToken = api.authToken(
   clientSecret,
   grantType,
   (error, data, response) => {
+    console.log(data)
+    console.log(error)
+    console.log(response)
     if (error) throw {};
     token = response.access_token;
   }
