@@ -180,7 +180,8 @@ app.post("/response", (req, res) => {
       },
       name: "SMS Request",
       urgency: Helper.randomItem(["LOW", "MEDIUM", "HIGH"]),
-      workersRequested: Math.floor(Helper.randomNumber(5, 10))
+      workersRequested: Math.floor(Helper.randomNumber(5, 10)),
+      type: userNeeds[0].neededAidType
     });
   res.status(200).send();
 });
