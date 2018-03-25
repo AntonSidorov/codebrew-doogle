@@ -150,12 +150,13 @@ app.post("/response", (req, res) => {
   } else {
     payload.body = "Thanks for your contribution 😎";
   }
+
+  console.log(token);
   if (!token) {
     res.send("Can't send an SMS, invalid token");
     return;
   }
-  console.log(token);
-  payload.to = req.body.from;  
+  payload.to = req.body.from;
   apiInstance.sendSMS(payload, callback);
   console.log(userNeeds);
   defaultDatabase
