@@ -34,5 +34,5 @@ export class DbService {
           [this.requestId(community, request)]: { ...request, workers: [...(request.workers || []).filter(u => u != uid)] }
         }
       })
-  public finishRequest = (uid: string, request: AidRequest, community: Community) => this.db.database.ref(`communities/${community.id}/requests`).remove();
+  public finishRequest = (uid: string, request: AidRequest, community: Community) => this.db.database.ref(`communities/${community.id}/requests/${this.requestId(community, request)}`).remove();
 }

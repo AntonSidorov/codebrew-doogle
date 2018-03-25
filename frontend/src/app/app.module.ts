@@ -26,6 +26,7 @@ import {
   MatProgressSpinnerModule,
   MatExpansionModule,
   MatCheckboxModule,
+  MatRadioModule
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -73,6 +74,7 @@ import { AuthService } from './auth.service';
     MatFormFieldModule,
     MatButtonModule,
     MatCheckboxModule,
+    MatRadioModule,
     MatIconModule,
     MatSlideToggleModule,
     MatProgressSpinnerModule,

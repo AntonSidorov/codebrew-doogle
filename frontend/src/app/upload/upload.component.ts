@@ -1,3 +1,4 @@
+import { aidTypes } from './../classes/index';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UploadComponent implements OnInit {
 
+  aids = aidTypes;
   constructor() { }
 
   ngOnInit() {

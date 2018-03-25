@@ -25,15 +25,15 @@
   </div>
 </nav>
 
-<mat-form-field class='search-container'>
-  <input class='search' type="text" matInput placeholder='Search communities...'>
+<mat-form-field class='search-container' *ngIf='dataState | async as data'>
+  <input class='search' type="text" matInput placeholder='Search communities...' [(ngModel)]='data.query' (keyup)='search()'>
 </mat-form-field>
 
 <div class="map-container" *ngIf='dataState | async as data'>
   <div class="anchor">
     <div class="left map-overlay" [class.open]='overlays.left'>
       <div class="map-overlay-content mat-elevation-z5 requests">
-        <ng-container *ngIf='data.communities as communities'>
+        <ng-container *ngIf='communities | async as communities'>
           <mat-accordion>
             <mat-expansion-panel *ngFor='let community of communities' class='community'>
               <mat-expansion-panel-header>

@@ -125,8 +125,12 @@
     color: #f60;
 }
 
+.request-description {
+    font-size: 1rem;
+}
+
 .request-name {
-    font-size: 1.25rem;
+    margin-top: .5rem;
 }
 
 .community {
@@ -141,4 +145,12 @@
 
 .requests {
     overflow-y: auto;
+}
+
+.actions .action {
+    margin-top: .5rem;
+}
+
+.request {
+    margin-top: .5rem;
 }

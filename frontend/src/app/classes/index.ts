@@ -103,26 +103,3 @@ export class Community {
 //     user_gen('13', 'bigmanonline@gmail.com', 'Gunder Dunderson', ',tomgitenr'),
 //   ]
 // });
-
-export let search_actual = (communities: Community[], query: string) => {
-  // let applyFilters = (coms: Community[], filters: { filter: string, enabled: boolean }[]) => coms.map(c => {
-  //   let enabled = filters.map(f => f.enabled ? f.filter : '').filter(v => !!v);
-  //   let reqs = {};
-  //   for (let key in c.requests)
-  //     if (enabled.indexOf(c.requests[key].type) > -1)
-  //       reqs[key] = c.requests[key];
-  //   return { ...c, requests: reqs };
-  // });
-};
-
-
-export const search = (array: string[], query: string) => {
-  let outputMatches: string[];
-  for (let i = 0; i < array.length; i++) {
-    if (array[i].startsWith(query)) {
-      outputMatches.push(query);
-    }
-  }
-  return outputMatches;
-}
-

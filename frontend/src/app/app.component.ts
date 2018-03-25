@@ -1,4 +1,4 @@
-import { DataCommunitiesLoad, DataUpdateFilter } from './actions/data.actions';
+import { DataCommunitiesLoad, DataUpdateFilter, DataSearch } from './actions/data.actions';
 import { DbService } from './db.service';
 import { AidRequest, aidTypes } from './classes/index';
 import { Helper } from './classes/helper';
@@ -35,11 +35,13 @@ export class AppComponent implements AfterViewInit, OnInit {
   @ViewChildren('iw')
   infoWindows: QueryList<any>;
 
+
   requestInfoWindowMap: any[];
   requests = this.communities.map(cs => cs.map(c => Object.values(c.requests))).map(r => [].concat(...r));
 
   overlays: { left: boolean, right: boolean } = { left: false, right: false };
 
+  search = _ => this.store.dispatch(new DataSearch(this.query));
   filtered = (filters) => (filters.map(v => v.enabled).filter(v => !v).length > 0);
   constructor(private store: Store<AppState>, private mapApiWrapper: GoogleMapsAPIWrapper, public db: DbService) {
   }
