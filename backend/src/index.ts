@@ -146,7 +146,9 @@ app.post("/response", (req, res) => {
     }
   }
   if (userNeeds.length === 0) {
-    payload.body = "🅱ad luck. we cant help you 😂";
+    payload.body = "Sorry. we cant help you 😂 \n" + 
+    "please try again in the format of: \n" + 
+    "categorie1 - specific needs \n";
   } else {
     payload.body = "Thanks for your contribution 😎";
   }
