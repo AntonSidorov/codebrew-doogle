@@ -7,8 +7,8 @@ export class User {
   onField = false;
 }
 
-export let aidTypes = ['Medical', 'Sanitation', 'Water', 'Education', 'Agriculture', 'Material', 'Emergency'];
 
+export let aidTypes = ['Medical', 'Sanitation', 'Water', 'Education', 'Agriculture', 'Material', 'Emergency'];
 export class GeoData {
   lat: number;
   long: number;
@@ -105,14 +105,14 @@ export class Community {
 // });
 
 export let search_actual = (communities: Community[], query: string) => {
-  // let applyFilters = (coms: Community[], filters: { filter: string, enabled: boolean }[]) => coms.map(c => {
-  //   let enabled = filters.map(f => f.enabled ? f.filter : '').filter(v => !!v);
-  //   let reqs = {};
-  //   for (let key in c.requests)
-  //     if (enabled.indexOf(c.requests[key].type) > -1)
-  //       reqs[key] = c.requests[key];
-  //   return { ...c, requests: reqs };
-  // });
+    let applyFilters = (coms: Community[], filters: { filter: string, enabled: boolean }[]) => coms.map(c => {
+     let enabled = filters.map(f => f.enabled ? f.filter : '').filter(v => !!v);
+     let reqs = {};
+     for (let key in c.requests)
+       if (enabled.indexOf(c.requests[key].type) > -1)
+         reqs[key] = c.requests[key];
+     return { ...c, requests: reqs };
+  });
 };
 
 
