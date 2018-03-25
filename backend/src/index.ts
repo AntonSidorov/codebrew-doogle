@@ -180,10 +180,21 @@ app.post("/response", (req, res) => {
       },
       name: "SMS Request",
       urgency: Helper.randomItem(["LOW", "MEDIUM", "HIGH"]),
-      workersRequested: Math.floor(Helper.randomNumber(5, 10))
+      workersRequested: Math.floor(Helper.randomNumber(5, 10)),
+      type: userReturnThing(userNeeds[0].neededAidType)
     });
   res.status(200).send();
 });
+
+const userReturnThing = (thing) => {
+  let aidTypes = ['Medical', 'Sanitation', 'Water', 'Education', 'Agriculture', 'Material', 'Emergency'];
+  for (let i = 0; i < aidTypes.length; i++){
+    if (thing.toLowerCase() === aidTypes[i].toLowerCase()){
+      return aidTypes[i];
+    }
+  }
+  return thing;
+}
 
 // https://www.npmjs.com/package/telstra-messaging
 
