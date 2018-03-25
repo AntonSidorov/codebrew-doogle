@@ -10,7 +10,8 @@ export let AUTH = {
 };
 
 export let DATA = {
-  communities: (state: AppState) => state.data.communities,
+  communities: (state: AppState) => (state.data.query || state.data.filters.map(v => v.enabled).some(v => !v)) ? state.data.filteredCommunities : state.data.communities,
   users: (state: AppState) => state.data.users,
-  state: (state: AppState) => state.data
+  state: (state: AppState) => state.data,
+  filtered: (state: AppState) => state.data.query || state.data.filters.map(v => v.enabled).some(v => !v)
 }

@@ -7,6 +7,8 @@ export class User {
   onField = false;
 }
 
+export let aidTypes = ['Medical', 'Sanitation', 'Water', 'Education', 'Agriculture', 'Material', 'Emergency'];
+
 export class GeoData {
   lat: number;
   long: number;

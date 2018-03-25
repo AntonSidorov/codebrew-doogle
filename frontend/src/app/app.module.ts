@@ -44,13 +44,12 @@ import { effects } from './effects';
 import { reducers } from './reducers';
 import { SimpleSerializer } from './ngrx';
 import { ListComponent } from './list/list.component';
-import { FiltersComponent } from './filters/filters.component';
 import { UploadComponent } from './upload/upload.component';
 import { DbService } from './db.service';
 import { AuthService } from './auth.service';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, ListComponent, FiltersComponent, UploadComponent],
+  declarations: [AppComponent, LoginComponent, ListComponent, UploadComponent],
   imports: [
     BrowserModule,
     FormsModule,

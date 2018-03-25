@@ -1,6 +1,6 @@
-import { DataCommunitiesLoad } from './actions/data.actions';
+import { DataCommunitiesLoad, DataUpdateFilter } from './actions/data.actions';
 import { DbService } from './db.service';
-import { AidRequest } from './classes/index';
+import { AidRequest, aidTypes } from './classes/index';
 import { Helper } from './classes/helper';
 import { AUTH, DATA } from './state/selectors';
 import { Observable } from 'rxjs/Observable';
@@ -28,25 +28,27 @@ export class AppComponent implements AfterViewInit, OnInit {
   auth = this.store.select(AUTH.state);
   openWindow = undefined;
 
+  dataState = this.store.select(DATA.state);
   communities = this.store.select(DATA.communities);
-  requests = this.communities.map(cs => cs.map(c => Object.values(c.requests))).map(r => [].concat(...r));
-
   query = '';
-
-  types = ['Medical', 'Sanitation', 'Water', 'Education', 'Agriculture', 'Material', 'Emergency'];
-  filters = this.types;
 
   @ViewChildren('iw')
   infoWindows: QueryList<any>;
 
   requestInfoWindowMap: any[];
+  requests = this.communities.map(cs => cs.map(c => Object.values(c.requests))).map(r => [].concat(...r));
 
   overlays: { left: boolean, right: boolean } = { left: false, right: false };
 
+  filtered = (filters) => (filters.map(v => v.enabled).filter(v => !v).length > 0);
   constructor(private store: Store<AppState>, private mapApiWrapper: GoogleMapsAPIWrapper, public db: DbService) {
   }
 
   objToArr = (obj) => Object.values(obj);
+
+  updateFilters = (filters, filter) => this.store.dispatch(new DataUpdateFilter([
+    ...filters.map(v => v.filter == filter.filter ? { filter: filter.filter, enabled: !filter.enabled } : v)
+  ]));
 
   log = (e) => console.log(e);
   mapClick = (gmap) => {

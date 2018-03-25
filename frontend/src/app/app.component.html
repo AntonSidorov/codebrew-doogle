@@ -29,11 +29,11 @@
   <input class='search' type="text" matInput placeholder='Search communities...'>
 </mat-form-field>
 
-<div class="map-container">
+<div class="map-container" *ngIf='dataState | async as data'>
   <div class="anchor">
     <div class="left map-overlay" [class.open]='overlays.left'>
       <div class="map-overlay-content mat-elevation-z5 requests">
-        <ng-container *ngIf='communities | async as communities'>
+        <ng-container *ngIf='data.communities as communities'>
           <mat-accordion>
             <mat-expansion-panel *ngFor='let community of communities' class='community'>
               <mat-expansion-panel-header>
@@ -62,45 +62,47 @@
         </ng-container>
       </div>
       <a mat-mini-fab color="primary" class="mat-elevation-z7 map-overlay-button" (click)='toggleOverlay(true)'>
-        <mat-icon>{{overlays.left ? 'keyboard_arrow_left' : 'keyboard_arrow_right'}}</mat-icon>
+        <mat-icon>list</mat-icon>
       </a>
     </div>
-    <div class="right map-overlay" [class.open]='overlays.right'>
+    <div class="right map-overlay" [class.open]='overlays.right' *ngIf='dataState | async as data'>
       <div class="map-overlay-content mat-elevation-z5">
         <h3>Filters</h3>
-        <mat-checkbox *ngFor='let type of types'>{{type}}</mat-checkbox>
+        <mat-checkbox *ngFor='let filter of data.filters' [checked]='filter.enabled' (change)='updateFilters(data.filters, filter)'>{{filter.filter}}</mat-checkbox>
       </div>
       <a mat-mini-fab color="primary" class="mat-elevation-z7 map-overlay-button" (click)='toggleOverlay(false)'>
-        <mat-icon>{{overlays.right ? 'keyboard_arrow_right' : 'keyboard_arrow_left'}}</mat-icon>
+        <mat-icon>find_replace</mat-icon>
       </a>
     </div>
   </div>
   <agm-map #gmap class='map' [latitude]="gm.lat" [longitude]="gm.lng" [zoom]="gm.zoom" [disableDefaultUI]="false" [zoomControl]="false"
-    (mapClick)='this.openWindow?.close()'>
-    <ng-container *ngFor='let request of requests | async'>
-      <agm-info-window #iw [latitude]='request.geoData.lat' [longitude]='request.geoData.long' [request]='request'>
-        <div class="request-description">
-          {{request.description}}
-        </div>
-        <ng-container *ngIf='auth | async as auth'>
-          <div class="actions" *ngIf='auth.authenticated'>
-            <a class='action join' *ngIf='objToArr(request.workers || {}).indexOf(auth.user.id) == -1' (click)='join(request)' mat-raised-button
-              color="primary">
-              Join
-            </a>
-            <a class='action leave' *ngIf='objToArr(request.workers || {}).indexOf(auth.user.id) > -1' (click)='leave(request)' mat-raised-button
-              color="primary">
-              Leave
-            </a>
-            <a class='action complete' *ngIf='objToArr(request.workers || {}).indexOf(auth.user.id)> -1' (click)='complete(request)'
-              mat-raised-button color="primary">
-              Complete
-            </a>
+    (mapClick)='this.openWindow?.close()' *ngIf='dataState | async as data'>
+    <ng-container *ngIf='requests | async as requests'>
+      <ng-container *ngFor='let request of requests'>
+        <agm-info-window #iw [latitude]='request.geoData.lat' [longitude]='request.geoData.long' [request]='request'>
+          <div class="request-description">
+            {{request.description}}
           </div>
-        </ng-container>
-      </agm-info-window>
-      <agm-circle *ngIf='request' [latitude]='request.geoData.lat' (circleClick)="toggleInfo(iw, gmap)" [longitude]='request.geoData.long'
-        [radius]='request.geoData.radius' [fillColor]='circleColor(request.type)'></agm-circle>
+          <ng-container *ngIf='auth | async as auth'>
+            <div class="actions" *ngIf='auth.authenticated'>
+              <a class='action join' *ngIf='objToArr(request.workers || {}).indexOf(auth.user.id) == -1' (click)='join(request)' mat-raised-button
+                color="primary">
+                Join
+              </a>
+              <a class='action leave' *ngIf='objToArr(request.workers || {}).indexOf(auth.user.id) > -1' (click)='leave(request)' mat-raised-button
+                color="primary">
+                Leave
+              </a>
+              <a class='action complete' *ngIf='objToArr(request.workers || {}).indexOf(auth.user.id)> -1' (click)='complete(request)'
+                mat-raised-button color="primary">
+                Complete
+              </a>
+            </div>
+          </ng-container>
+        </agm-info-window>
+        <agm-circle *ngIf='request' [latitude]='request.geoData.lat' (circleClick)="toggleInfo(iw, gmap)" [longitude]='request.geoData.long'
+          [radius]='request.geoData.radius' [fillColor]='circleColor(request.type)'></agm-circle>
+      </ng-container>
     </ng-container>
   </agm-map>
 </div>
