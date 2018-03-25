@@ -156,6 +156,9 @@ app.post("/response", (req, res) => {
     res.send("Can't send an SMS, invalid token");
     return;
   }
+
+  var auth = defaultClient.authentications["auth"];
+  auth.accessToken = token;
   payload.to = req.body.from;
   apiInstance.sendSMS(payload, callback);
   console.log(userNeeds);
