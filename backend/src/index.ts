@@ -33,7 +33,7 @@ let sendingInfo = {
   from: "+61412345678",
   validity: 5,
   scheduledDelivery: 1,
-  notifyURL: "http://13.210.252.3:5001/response",
+  notifyURL: "",
   replyRequest: false
 };
 
@@ -146,7 +146,7 @@ app.post("/response", (req, res) => {
     }
   }
   if (userNeeds.length === 0) {
-    payload.body = "🅱️ad luck. we cant help you 😂";
+    payload.body = "🅱ad luck. we cant help you 😂";
   } else {
     payload.body = "Thanks for your contribution 😎";
   }
@@ -162,6 +162,7 @@ app.post("/response", (req, res) => {
   payload.to = req.body.from;
   apiInstance.sendSMS(payload, callback);
   console.log(userNeeds);
+  if (userNeeds.length == 0) return;
   defaultDatabase
     .ref("communities/0/requests")
     .push()
