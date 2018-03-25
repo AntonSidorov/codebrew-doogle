@@ -16,7 +16,6 @@ export class GeoData {
 export class AidRequest {
   geoData: GeoData;
   name: string;
-  shortDescription: string;
   description?: string;
   workersRequested: number;
   type: 'Medical' | 'Sanitation' | 'Water' | 'Education' | 'Agriculture' | 'Material' | 'Emergency';
@@ -27,8 +26,9 @@ export class AidRequest {
 }
 
 export class Community {
+  id: string;
   names: string[] = [];
-  requests: AidRequest[] = [];
+  requests: { [id: string]: AidRequest };
   location?: GeoData;
 }
 

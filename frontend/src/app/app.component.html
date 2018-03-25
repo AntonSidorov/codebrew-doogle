@@ -66,10 +66,13 @@
       </a>
     </div>
     <div class="right map-overlay" [class.open]='overlays.right'>
+      <div class="map-overlay-content mat-elevation-z5">
+        <h3>Filters</h3>
+        <mat-checkbox *ngFor='let type of types'>{{type}}</mat-checkbox>
+      </div>
       <a mat-mini-fab color="primary" class="mat-elevation-z7 map-overlay-button" (click)='toggleOverlay(false)'>
         <mat-icon>{{overlays.right ? 'keyboard_arrow_right' : 'keyboard_arrow_left'}}</mat-icon>
       </a>
-      <div class="map-overlay-content mat-elevation-z5"></div>
     </div>
   </div>
   <agm-map #gmap class='map' [latitude]="gm.lat" [longitude]="gm.lng" [zoom]="gm.zoom" [disableDefaultUI]="false" [zoomControl]="false"
@@ -79,20 +82,25 @@
         <div class="request-description">
           {{request.description}}
         </div>
-        <div class="actions">
-          <a class='action join' (click)='join(request)' mat-raised-button color="primary">
-            Join
-          </a>
-          <a class='action leave' (click)='leave(request)' mat-raised-button color="primary">
-            Leave
-          </a>
-          <a class='action complete' (click)='complete(request)' mat-raised-button color="primary">
-            Complete
-          </a>
-        </div>
+        <ng-container *ngIf='auth | async as auth'>
+          <div class="actions" *ngIf='auth.authenticated'>
+            <a class='action join' *ngIf='objToArr(request.workers || {}).indexOf(auth.user.id) == -1' (click)='join(request)' mat-raised-button
+              color="primary">
+              Join
+            </a>
+            <a class='action leave' *ngIf='objToArr(request.workers || {}).indexOf(auth.user.id) > -1' (click)='leave(request)' mat-raised-button
+              color="primary">
+              Leave
+            </a>
+            <a class='action complete' *ngIf='objToArr(request.workers || {}).indexOf(auth.user.id)> -1' (click)='complete(request)'
+              mat-raised-button color="primary">
+              Complete
+            </a>
+          </div>
+        </ng-container>
       </agm-info-window>
       <agm-circle *ngIf='request' [latitude]='request.geoData.lat' (circleClick)="toggleInfo(iw, gmap)" [longitude]='request.geoData.long'
-        [radius]='request.geoData.radius' [fillColor]='request.urgency == "HIGH" ? "red": request.urgency == "MEDIUM" ? "#c39c00": "#2fff2f"'></agm-circle>
+        [radius]='request.geoData.radius' [fillColor]='circleColor(request.type)'></agm-circle>
     </ng-container>
   </agm-map>
 </div>

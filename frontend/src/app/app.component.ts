@@ -33,6 +33,9 @@ export class AppComponent implements AfterViewInit, OnInit {
 
   query = '';
 
+  types = ['Medical', 'Sanitation', 'Water', 'Education', 'Agriculture', 'Material', 'Emergency'];
+  filters = this.types;
+
   @ViewChildren('iw')
   infoWindows: QueryList<any>;
 
@@ -53,7 +56,7 @@ export class AppComponent implements AfterViewInit, OnInit {
   }
   toggleInfo(iw) {
     console.log('toggleInfo');
-    if (!this.openWindow) {
+    if (!this.openWindow || !this.openWindow.isOpen) {
       iw.open();
       this.openWindow = iw;
       return;
@@ -65,6 +68,26 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     iw.open();
     this.openWindow = iw;
+  }
+
+  join = async (request) => {
+    let communities = await this.communities.take(1).toPromise();
+    let com = communities.find(c => !!Object.values(c.requests).find(r => r == request));
+    let auth = await this.auth.take(1).toPromise();
+    this.db.joinRequest(auth.user.id, request, com);
+  }
+
+  leave = async (request) => {
+    let communities = await this.communities.take(1).toPromise();
+    let com = communities.find(c => !!Object.values(c.requests).find(r => r == request));
+    let auth = await this.auth.take(1).toPromise();
+    this.db.leaveRequest(auth.user.id, request, com);
+  }
+  complete = async (request) => {
+    let communities = await this.communities.take(1).toPromise();
+    let com = communities.find(c => !!Object.values(c.requests).find(r => r == request));
+    let auth = await this.auth.take(1).toPromise();
+    this.db.finishRequest(auth.user.id, request, com);
   }
 
   async ngAfterViewInit() {
@@ -88,6 +111,27 @@ export class AppComponent implements AfterViewInit, OnInit {
 
   ngOnInit() {
     this.store.dispatch(new DataCommunitiesLoad());
+  }
+
+  circleColor = (str) => {
+    switch (str) {
+      case 'Medical':
+        return 'orange';
+      case 'Sanitation':
+        return 'purple';
+      case 'Water':
+        return 'blue';
+      case 'Education':
+        return 'green';
+      case 'Agriculture':
+        return '#0ff';
+      case 'Natural':
+        return '#333';
+      case 'Emergency':
+        return 'red';
+      default:
+        return 'black';
+    }
   }
 
   logout = () => this.store.dispatch(new AuthLogOut());
