@@ -150,7 +150,7 @@ app.post("/response", (req, res) => {
     "please try again in the format of: \n" + 
     "category specific needs \n";
   } else {
-    payload.body = "Thanks for your contribution. If you weren't honest, we know where to find you 😂";
+    payload.body = "Thanks for your contribution. If you weren't honest 😤, we know where to find you 😂😎😱🔥";
   }
 
   console.log(token);
