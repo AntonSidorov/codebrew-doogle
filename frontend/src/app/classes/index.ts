@@ -101,3 +101,15 @@ export class Community {
 //     user_gen('13', 'bigmanonline@gmail.com', 'Gunder Dunderson', ',tomgitenr'),
 //   ]
 // });
+
+
+export const search = (array:string[], query:string) => {
+  let outputMatches:string[];
+  for (let i = 0; i < array.length; i++){
+    if (array[i].startsWith(query)){
+      outputMatches.push(query);
+    }
+  }
+  return outputMatches;
+}
+
