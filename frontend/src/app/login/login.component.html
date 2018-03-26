@@ -1,3 +1,21 @@
+<div class="login">
+  <h3>Login</h3>
+  <mat-form-field>
+    <input matInput type="text" placeholder="Email address" [(ngModel)]='email'>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="password" placeholder="Password" [(ngModel)]='password'>
+  </mat-form-field>
+  <a color="primary" mat-raised-button (click)='login()'>Log in</a>
+</div>
+
+<!--
+LOGINS:
+chadaidworker@gmail.com : Chaddyworker
+chadCharity@gmail.com : ChaddyCharity
+sudanCharity@gmail.com : SudanCharity
+melbourneThing@gmail.com : melbourneThing
+ -->
 <!-- <a class='login-btn facebook' mat-raised-button (click)='login("facebook")'>
   <mat-icon svgIcon='facebook'></mat-icon> Sign in with Facebook</a>
 <a class='login-btn' mat-raised-button (click)='login("google")'>
@@ -30,16 +48,3 @@
   <button mat-raised-button color='primary' type='button' [disabled]='email.errors' (click)='resetPassword()'>Reset password</button>
   <button type='button' class='au-btn au-fill au-outline au-accent' (click)='toggleReset()'>Cancel</button>
 </div> -->
-
-<header id="showcase">
-  <h1>Open Source Data</h1>
-  <p>
-    Free databases for charities to deliver the needed help.
-  </p>
-  <form onsubmit="check">
-    <input type="text" placeholder="username" />
-    <input type="password" placeholder="password" />
-    <button class="button" type="submit"> Sign In </button>
-  </form>
-
-</header>

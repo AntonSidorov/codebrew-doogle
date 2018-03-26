@@ -1,0 +1,17 @@
+<div>
+  <mat-form-field class="example-full-width">
+    <mat-icon matPrefix color="primary">location_on</mat-icon>
+    <input type="text" placeholder="Location" matInput class="loc-box" />
+  </mat-form-field>
+  <br />
+  <mat-radio-group class="radios">
+    <mat-radio-button onclick="showAidInput" *ngFor="let aid of aids" class="rad-button" [value]='aid'>{{aid}}</mat-radio-button>
+  </mat-radio-group>
+  <br />
+  <div class="container">
+    <mat-form-field>
+      <textarea matInput placeholder="Aid request description" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>
+    </mat-form-field>
+  </div>
+  <a mat-raised-button class='add-aid' color='primary'>Request Help</a>
+</div>

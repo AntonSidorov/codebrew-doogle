@@ -1,0 +1,14 @@
+@import './css/_global.scss';
+@import './css/_elements.scss';
+body,
+html {
+    height: 100vh;
+    width: 100vw;
+    app-root,
+    & {
+        margin: 0;
+        padding: 0;
+        transition: none;
+    }
+    transition: none;
+}

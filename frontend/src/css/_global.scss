@@ -17,36 +17,28 @@ h3 {
     font-size: 1.25rem;
 }
 
-.dollar {
-    color: $accent-color;
-    font-style: normal;
-}
+// .has-danger {
+//     .mat-input-ripple {
+//         background-color: $danger-color;
+//     }
+//     &.mat-focused .mat-input-placeholder,
+//     .mat-input-placeholder {
+//         color: $danger-color;
+//     }
+//     .mat-input-underline {
+//         background-color: $danger-color;
+//     }
+// }
 
-.search-match {
-    color: $accent-color;
-}
+// .mat-input-ripple {
+//     background-color: $accent-color;
+// }
 
-.has-danger {
-    .mat-input-ripple {
-        background-color: $danger-color;
-    }
-    &.mat-focused .mat-input-placeholder,
-    .mat-input-placeholder {
-        color: $danger-color;
-    }
-    .mat-input-underline {
-        background-color: $danger-color;
-    }
-}
-
-.mat-input-ripple {
-    background-color: $accent-color;
-}
-
-.mat-focused .mat-input-placeholder {
-    color: $accent-color;
-}
+// .mat-focused .mat-input-placeholder {
+//     color: $accent-color;
+// }
 
 .mat-input-container {
     display: block!important;
 }
+

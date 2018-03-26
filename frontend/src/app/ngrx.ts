@@ -6,6 +6,7 @@ export interface RouterStateUrl {
 }
 
 export class SimpleSerializer implements RouterStateSerializer<RouterStateUrl> {
+
   serialize(routerState: RouterStateSnapshot): RouterStateUrl {
     const { url } = routerState;
     return { url };

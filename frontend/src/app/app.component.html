@@ -1,0 +1,109 @@
+<nav class="navbar mat-elevation-z5">
+  <div class="left">
+    <a href="/" mat-button routerLink="/" class="homepage">
+      <img class='logo' src="assets/img/logo.png" alt="Open_Aid+">
+    </a>
+  </div>
+  <div class="right">
+    <ng-container *ngIf='auth | async as auth'>
+      <div class="upload">
+        <a class="upload-toggle" (click)='toggleUpload()' *ngIf='auth.authenticated' mat-icon-button color="primary">
+          <mat-icon>cloud_upload</mat-icon>
+        </a>
+        <app-upload *ngIf='upload' class='mat-elevation-z10'></app-upload>
+      </div>
+      <div class="login" *ngIf='!auth.authenticated'>
+        <a class="login-toggle" (click)='toggleLogin()' mat-icon-button color="primary">
+          <mat-icon>person</mat-icon>
+        </a>
+        <app-login *ngIf='login' class='mat-elevation-z3'></app-login>
+      </div>
+      <a class="logout-button" (click)='logout()' *ngIf='auth.authenticated' mat-icon-button color="primary">
+        <mat-icon>exit_to_app</mat-icon>
+      </a>
+    </ng-container>
+  </div>
+</nav>
+
+<mat-form-field class='search-container' *ngIf='dataState | async as data'>
+  <input class='search' type="text" matInput placeholder='Search communities...' [(ngModel)]='data.query' (keyup)='search()'>
+</mat-form-field>
+
+<div class="map-container" *ngIf='dataState | async as data'>
+  <div class="anchor">
+    <div class="left map-overlay" [class.open]='overlays.left'>
+      <div class="map-overlay-content mat-elevation-z5 requests">
+        <ng-container *ngIf='communities | async as communities'>
+          <mat-accordion>
+            <mat-expansion-panel *ngFor='let community of communities' class='community'>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  {{(community.names || [''])[0]}}
+                </mat-panel-title>
+                <mat-panel-description>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <ng-container *ngIf='objToArr(community.requests) as requests'>
+                <div *ngFor='let request of requests' class='request' (click)='openIW(request)'>
+                  <div class="request-name">
+                    {{request.name}}
+                  </div>
+                  <div class="request-stats" *ngIf='request.peopleAffected || request.workersRequested'>
+                    <div class="request-stat">
+                      <mat-icon>person</mat-icon> {{request.peopleAffected}}</div>
+                    <div class="request-stat">
+                      <mat-icon>work</mat-icon> {{request.workersRequested}}
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </ng-container>
+      </div>
+      <a mat-mini-fab color="primary" class="mat-elevation-z7 map-overlay-button" (click)='toggleOverlay(true)'>
+        <mat-icon>list</mat-icon>
+      </a>
+    </div>
+    <div class="right map-overlay" [class.open]='overlays.right' *ngIf='dataState | async as data'>
+      <div class="map-overlay-content mat-elevation-z5">
+        <h3>Filters</h3>
+        <mat-checkbox *ngFor='let filter of data.filters' [checked]='filter.enabled' (change)='updateFilters(data.filters, filter)'>{{filter.filter}}</mat-checkbox>
+      </div>
+      <a mat-mini-fab color="primary" class="mat-elevation-z7 map-overlay-button" (click)='toggleOverlay(false)'>
+        <mat-icon>find_replace</mat-icon>
+      </a>
+    </div>
+  </div>
+  <agm-map #gmap class='map' [latitude]="gm.lat" [longitude]="gm.lng" [zoom]="gm.zoom" [disableDefaultUI]="false" [zoomControl]="false"
+    (mapClick)='this.openWindow?.close()' *ngIf='dataState | async as data'>
+    <ng-container *ngIf='requests | async as requests'>
+      <ng-container *ngFor='let request of requests'>
+        <agm-info-window #iw [latitude]='request.geoData.lat' [longitude]='request.geoData.long' [request]='request'>
+          <h3>{{request.name}}</h3>
+          <div class="request-description">
+            {{request.description}}
+          </div>
+          <ng-container *ngIf='auth | async as auth'>
+            <div class="actions" *ngIf='auth.authenticated'>
+              <a class='action join' *ngIf='objToArr(request.workers || {}).indexOf(auth.user.id) == -1' (click)='join(request)' mat-raised-button
+                color="primary">
+                Join
+              </a>
+              <a class='action leave' *ngIf='objToArr(request.workers || {}).indexOf(auth.user.id) > -1' (click)='leave(request)' mat-raised-button
+                color="primary">
+                Leave
+              </a>
+              <a class='action complete' *ngIf='objToArr(request.workers || {}).indexOf(auth.user.id)> -1' (click)='complete(request)'
+                mat-raised-button color="primary">
+                Complete
+              </a>
+            </div>
+          </ng-container>
+        </agm-info-window>
+        <agm-circle *ngIf='request' [latitude]='request.geoData.lat' (circleClick)="toggleInfo(iw, gmap)" [longitude]='request.geoData.long'
+          [radius]='request.geoData.radius' [fillColor]='circleColor(request.type)'></agm-circle>
+      </ng-container>
+    </ng-container>
+  </agm-map>
+</div>

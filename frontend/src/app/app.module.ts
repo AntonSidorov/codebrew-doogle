@@ -1,7 +1,8 @@
+import { LoginComponent } from './login/login.component';
 import { environment } from '../environments/environment';
 
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, ApplicationRef } from '@angular/core';
+import { NgModule, ApplicationRef, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -16,30 +17,40 @@ import { stateReducer, SETROOT } from './reducers/root.reducer';
 import { createNewHosts, removeNgStyles, createInputTransfer } from '@angularclass/hmr';
 
 // // Material
-// import {
-//   MatSnackBarModule,
-//   MatInputModule,
-//   MatFormFieldModule,
-//   MatButtonModule,
-//   MatIconModule,
-//   MatSlideToggleModule,
-//   MatDialogModule,
-//   MatProgressSpinnerModule
-// } from '@angular/material';
+import {
+  MatInputModule,
+  MatFormFieldModule,
+  MatButtonModule,
+  MatIconModule,
+  MatSlideToggleModule,
+  MatProgressSpinnerModule,
+  MatExpansionModule,
+  MatCheckboxModule,
+  MatRadioModule
+} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Main - Angular
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
+import { AgmCoreModule } from '@agm/core';
+
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
 // Main - NGRX
 import { initial, AppState } from './state';
 import { effects } from './effects';
 import { reducers } from './reducers';
 import { SimpleSerializer } from './ngrx';
+import { ListComponent } from './list/list.component';
+import { UploadComponent } from './upload/upload.component';
+import { DbService } from './db.service';
+import { AuthService } from './auth.service';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, LoginComponent, ListComponent, UploadComponent],
   imports: [
     BrowserModule,
     FormsModule,
@@ -50,6 +61,24 @@ import { SimpleSerializer } from './ngrx';
       initialState: initial,
       metaReducers: [stateReducer]
     }),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyA_B4fvMgb4mWh_DozXU-jpn84FcrKDh5s'
+    }),
+    // Firebase
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFireDatabaseModule,
+    // Angular Material
+    BrowserAnimationsModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatRadioModule,
+    MatIconModule,
+    MatSlideToggleModule,
+    MatProgressSpinnerModule,
+    MatExpansionModule,
     EffectsModule.forRoot(effects),
     StoreRouterConnectingModule,
     StoreDevtoolsModule.instrument({ maxAge: 50 })
@@ -57,12 +86,16 @@ import { SimpleSerializer } from './ngrx';
   providers: [
     /* services */
     // { provide: OverlayContainer, useClass: FullscreenOverlayContainer },
-    { provide: RouterStateSerializer, useClass: SimpleSerializer }
+    DbService,
+    AuthService,
+    { provide: RouterStateSerializer, useClass: SimpleSerializer, },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas:
+  [NO_ERRORS_SCHEMA]
 })
 export class AppModule {
-  constructor(public appRef: ApplicationRef, private _store: Store<AppState>) {}
+  constructor(public appRef: ApplicationRef, private _store: Store<AppState>) { }
 
   hmrOnInit(store) {
     if (!store || !store.rootState) return;

@@ -1,7 +1,7 @@
+import { AuthLogIn } from './../actions/auth.actions';
 import { Component, OnInit } from '@angular/core';
 import { AppState } from '../state';
 import { Store } from '@ngrx/store';
-import { MapView } from '../actions/map.actions';
 
 @Component({
   selector: 'app-login',
@@ -9,9 +9,16 @@ import { MapView } from '../actions/map.actions';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+
+  email = '';
+  password = '';
+
   constructor(private store: Store<AppState>) {
   }
 
   ngOnInit() { }
 
+  login() {
+    this.store.dispatch(new AuthLogIn(this.email, this.password));
+  }
 }

@@ -1,16 +1,19 @@
 import { RouterReducerState } from '@ngrx/router-store/';
-import { MapState } from './map.state';
+import { AuthState } from './auth.state';
+import { DataState } from './data.state';
 
 export interface AppState {
   routerReducer: RouterReducerState;
-  map: MapState;
+  auth: AuthState;
+  data: DataState;
   // class state definitions
 }
 
 export function initial(): AppState {
   return {
     routerReducer: undefined,
-    map: MapState.Default()
+    auth: AuthState.Default(),
+    data: DataState.Default()
     // instances
   };
 }

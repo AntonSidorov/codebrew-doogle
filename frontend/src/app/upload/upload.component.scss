@@ -1,0 +1,42 @@
+p {
+    margin: 0;
+}
+
+.radio-buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+.add-field {
+    margin: 0 1rem;
+    display: flex;
+    flex-direction: row;
+    line-height: 24px;
+}
+
+.loc-box {
+    font-size: 1.1rem;
+    border-width: 0px 0px 1px 0px;
+}
+
+.pin-style {
+    color: orange;
+}
+
+.container {
+    margin: 0.5rem;
+}
+
+.rad-button {
+    margin: 0.4rem;
+}
+
+.radios {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-aid{
+  width:100%
+}
+

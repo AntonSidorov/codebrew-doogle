@@ -13,5 +13,6 @@
     // "src/typings.d.ts": true,
     // "src/test.ts": true
     "**/*.spec.ts": true
-  }
+  },
+  "tslint.alwaysShowRuleFailuresAsWarnings": true
 }

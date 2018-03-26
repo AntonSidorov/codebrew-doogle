@@ -1,7 +1,11 @@
 {
   "ngrx_actions_setup": {
     "prefix": "ngrx-actions",
-    "body": ["import { Action } from '@ngrx/store';", "", "export type All = $1;"],
+    "body": [
+      "import { Action } from '@ngrx/store';",
+      "",
+      "export type All = $1;"
+    ],
     "description": "(ngrx) Sets up an empty .action.ts file"
   },
   "ngrx_actions_new": {
@@ -9,7 +13,7 @@
     "body": [
       "export const ${5:${4:${TM_FILENAME/((?:.*)*)\\.actions.ts/${1:/upcase}/}}_${1:ACTION}} = '[$4] $2';",
       "export class ${6:${TM_FILENAME/((?:.*)*)\\.actions.ts/${1:/capitalize}/}}${2:Action} implements Action {",
-      "\treadonly type = $5",
+      "\treadonly type = $5;",
       "\tconstructor(${3| ,public payload: any|}){",
       "\t\t$0",
       "\t}",
